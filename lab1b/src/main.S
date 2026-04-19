@@ -1,3 +1,5 @@
+/** Deprecated */
+
 .section const_section, "a"                        # Read-only constants
         .align  2
         .global  .test_string
