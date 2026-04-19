@@ -10,84 +10,91 @@
         .align 1
         .global decToASCII
 decToASCII:
-        mv      t0, a0                # t0 = destination pointer
-        mv      t1, a1                # t1 = value to convert
+        mv      t0, a0                  # t0 = destination pointer           
+        mv      t1, a1                  # t1 = value
+
         bgez    t1, .positive
+
         li      t2, '-'
         sb      t2, 0(t0)
-        sub     t1, zero, t1          # absolute value as unsigned for INT_MIN
+        
+        not     t1, t1
+        addi    t1, t1, 1          
         j       .sign_done
 .positive:
         li      t2, ' '
         sb      t2, 0(t0)
+
 .sign_done:
-        addi    t0, t0, 1             # point to first digit position
+        addi    t0, t0, 1             
 
         li      t3, 1000000000
-        divu    t4, t1, t3
-        remu    t1, t1, t3
+        div     t4, t1, t3
+        rem     t1, t1, t3
         addi    t4, t4, '0'
         sb      t4, 0(t0)
         addi    t0, t0, 1
 
         li      t3, 100000000
-        divu    t4, t1, t3
-        remu    t1, t1, t3
+        div     t4, t1, t3
+        rem     t1, t1, t3
         addi    t4, t4, '0'
         sb      t4, 0(t0)
         addi    t0, t0, 1
 
         li      t3, 10000000
-        divu    t4, t1, t3
-        remu    t1, t1, t3
+        div     t4, t1, t3
+        rem     t1, t1, t3
         addi    t4, t4, '0'
         sb      t4, 0(t0)
         addi    t0, t0, 1
 
         li      t3, 1000000
-        divu    t4, t1, t3
-        remu    t1, t1, t3
+        div     t4, t1, t3
+        rem     t1, t1, t3
         addi    t4, t4, '0'
         sb      t4, 0(t0)
         addi    t0, t0, 1
 
         li      t3, 100000
-        divu    t4, t1, t3
-        remu    t1, t1, t3
+        div     t4, t1, t3
+        rem     t1, t1, t3
         addi    t4, t4, '0'
         sb      t4, 0(t0)
         addi    t0, t0, 1
 
         li      t3, 10000
-        divu    t4, t1, t3
-        remu    t1, t1, t3
+        div     t4, t1, t3
+        rem     t1, t1, t3
         addi    t4, t4, '0'
         sb      t4, 0(t0)
         addi    t0, t0, 1
 
         li      t3, 1000
-        divu    t4, t1, t3
-        remu    t1, t1, t3
+        div     t4, t1, t3
+        rem     t1, t1, t3
         addi    t4, t4, '0'
         sb      t4, 0(t0)
         addi    t0, t0, 1
 
         li      t3, 100
-        divu    t4, t1, t3
-        remu    t1, t1, t3
+        div     t4, t1, t3
+        rem     t1, t1, t3
         addi    t4, t4, '0'
         sb      t4, 0(t0)
         addi    t0, t0, 1
 
         li      t3, 10
-        divu    t4, t1, t3
-        remu    t1, t1, t3
+        div     t4, t1, t3
+        rem     t1, t1, t3
         addi    t4, t4, '0'
         sb      t4, 0(t0)
         addi    t0, t0, 1
 
         addi    t1, t1, '0'
         sb      t1, 0(t0)
+
         addi    t0, t0, 1
         sb      zero, 0(t0)
+        
         ret
