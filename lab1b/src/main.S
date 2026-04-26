@@ -1,54 +1,106 @@
-/** Deprecated */
+/** =========================
+ *  DATA / CONST
+ *  ========================= */
+.section const_section, "a"
+.align 2
 
-.section const_section, "a"                        # Read-only constants
-        .align  2
-        .global  .test_string
-.test_string:
-        .asciz  "Test String ABC 0123!"
+test_string:
+        .asciz "Test String ABC 0123!"
 
-        .section .bss, "aw", @nobits                      # RAM storage for conversion results
-        .align  2
-        .global  hex_buffer
+
+/** =========================
+ *  BSS (RAM BUFFERS)
+ *  ========================= */
+.section .bss, "aw", @nobits
+.align 2
+
+ram_buffer:
+        .space 64
+
 hex_buffer:
-        .space  12
-        .align  2
-        .global  dec_buffer
+        .space 12          # "0xFFFFFFFF\0"
+
 dec_buffer:
-        .space  16
+        .space 16          # sign + digits + \0
 
-        .text                                              # Mark the next section as .text/.code section
-        .align  1                                          # Aligned to 2^1 Bytes (aka 2 Bytes)
-        .global  main                                      # Defines a globally-visible (exported) symbol "main", visible to the linker ld
-main:                                                      # The location of the Symbol "main": here, the function starts
-        # 0. Save the callee-saved registers ra, s1, s2 onto the stack
-        addi    sp, sp, -12                                # Allocate data on the stack: 12 Bytes
-        sw      ra, 8(sp)                                  # Store the return address
-        sw      s1, 4(sp)                                  # Save s1
-        sw      s2, 0(sp)                                  # Save s2
 
-        la      s1, hex_buffer                             # pointer to hex output buffer
-        la      s2, dec_buffer                             # pointer to decimal output buffer
-        li      t0, 0                                      # 16-bit test counter for hex conversion
-        li      t1, 0                                      # 32-bit signed test counter for decimal conversion
+/** =========================
+ *  TEXT
+ *  ========================= */
+.section .text
+.align 1
+.global main
 
-.main_loop:
+
+main:
+        /** Prologue */
+        addi    sp, sp, -16
+        sw      ra, 12(sp)
+        sw      s0, 8(sp)
+        sw      s1, 4(sp)
+        sw      s2, 0(sp)
+
+        /** =========================
+         *  STRING PIPELINE (einmalig)
+         *  ========================= */
+
+        /* strlen */
+        la      a0, test_string
+        jal     my_strlen
+        mv      s0, a0                 # Länge (optional gespeichert)
+
+        /* strcpy */
+        la      a0, ram_buffer
+        la      a1, test_string
+        jal     my_strcpy
+
+        /* strtolower */
+        la      a0, ram_buffer
+        jal     my_strtolower
+
+
+        /** =========================
+         *  INIT POINTERS
+         *  ========================= */
+
+        la      s1, hex_buffer         # hex buffer
+        la      s2, dec_buffer         # dec buffer
+
+        li      t0, 0                  # hex counter
+        li      t1, -2147483648        # dec counter
+
+
+/** =========================
+ *  MAIN LOOP (HEX + DEC parallel)
+ *  ========================= */
+loop:
+
+        /** ---- HEX ---- */
         mv      a0, s1
         mv      a1, t0
         jal     hexToASCII
 
+        addi    t0, t0, 1
+        andi    t0, t0, 0xFFFF
+
+
+        /** ---- DEC ---- */
         mv      a0, s2
         mv      a1, t1
         jal     decToASCII
 
-        addi    t0, t0, 1
-        andi    t0, t0, 0xffff
         addi    t1, t1, 1
-        j       .main_loop                                 # Repeat forever
 
-        # ####################################### #
-        # Unreachable cleanup - kept for best practice
-        lw      s2, 0(sp)                                  # Restore s2
-        lw      s1, 4(sp)                                  # Restore s1
-        lw      ra, 8(sp)                                  # Restore ra
-        addi    sp, sp, 12                                 # Restore stack
-        ret                                                # Return to caller
+
+        j       loop
+
+
+/** =========================
+ *  EPILOG (nie erreicht)
+ *  ========================= */
+        lw      s2, 0(sp)
+        lw      s1, 4(sp)
+        lw      s0, 8(sp)
+        lw      ra, 12(sp)
+        addi    sp, sp, 16
+        ret
