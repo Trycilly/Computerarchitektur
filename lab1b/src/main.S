@@ -1,5 +1,5 @@
 /** =========================
- * DATA / CONST (Keep this)
+ * DATA / CONST
  * ========================= */
 .section const_section, "a"
 .align 2
