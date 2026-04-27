@@ -24,24 +24,28 @@ main:                                                      # The location of the
 
         # 2. Setup the loop state
         li      t2, 5                                      # LED GPIO pin number
-        li      t0, 0                                      # 16-bit counter starting at 0
+        li      t6, 0                                      # 16-bit counter starting at 0
 
         # 3. Loop forever and blink the LED every other count
-.main_loop:                                                # This symbol starting with "." is by definition local
-        andi    t1, t0, 1                                  # Check odd/even: odd => LED on, even => LED off
-        beqz    t1, .led_off
-        mv      a0, t2
-        jal     led_on
-        j       .after_led
-.led_off:
-        mv      a0, t2
-        jal     led_off
-.after_led:
-        jal     delay_0_5sec                               # Delay approximately 0.5 seconds
-        addi    t0, t0, 1                                  # Increment the 16-bit counter
-        andi    t0, t0, 0x3f                               # Keep the value in the range 0..63 for rollover
-        j       .main_loop                                 # Repeat forever
+        .main_loop:                                                
+                andi    t1, t6, 1           # Check odd/even: t1=0 (Even), t1=1 (Odd)
+                beqz    t1, .led_on_branch  
+                
+                mv      a0, t2              # Set a0 = 5
+                jal     led_off             
+                j       .after_led          # Skip the ON section
 
+.led_on_branch:
+        # If we are here, it's EVEN -> Turn LED ON
+        mv      a0, t2              # Set a0 = 5
+        jal     led_on              
+        
+.after_led:
+        jal     my_delay        # Wait 0.5 seconds
+        addi    t6, t6, 1           # Increment counter
+        li      t3, 64              # Load our limit into a spare register
+        blt     t6, t3, .main_loop  # If t6 < 64, loop again. 
+                                    # If t6 == 64, it "falls through" to exit.
 
         # ####################################### #
         # In fact, the following clean-up code will never be executed... Still keep it, to show best practice
