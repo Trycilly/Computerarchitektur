@@ -39,10 +39,10 @@ hexToASCII:
 /** Loop: extract each 4-bit nibble and map it to ASCII */
 .hex_loop:
         srl     t5, t2, t3                              # shift desired nibble to lowest 4 bits
-        andi    t5, t5, t4                              # isolate the lowest 4 bits (0-15) 
-        add     t7, t6, t5                              # index into table using nibble value
-        lbu     t7, 0(t7)                               # load corresponding ASCII character
-        sb      t7, 0(t0)                               # store character in destination buffer
+        and     t5, t5, t4                              # isolate the lowest 4 bits (0-15) 
+        add     t5, t6, t5                              # index into table using nibble value
+        lbu     t5, 0(t5)                               # load corresponding ASCII character
+        sb      t5, 0(t0)                               # store character in destination buffer
         addi    t0, t0, 1                               # advance destination pointer
         addi    t3, t3, -4                              # move to next nibble (shift right by 4 bits)
         bgez    t3, .hex_loop                           # repeat until all 8 nibbles processed
