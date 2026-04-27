@@ -1,12 +1,34 @@
 /** =========================
- * TEXT
+ * DATA / CONST (Keep this)
+ * ========================= */
+.section const_section, "a"
+.align 2
+
+test_string:
+        .asciz "Test String ABC 0123!"
+
+/** =========================
+ * BSS (RAM BUFFERS)
+ * ========================= */
+.section .bss, "aw", @nobits
+.align 2
+
+ram_buffer:
+        .space 64
+hex_buffer:
+        .space 12          # "0xFFFFFFFF\0"
+dec_buffer:
+        .space 16          # sign + digits + \0
+
+/** =========================
+ * MAIN TEXT SECTION
  * ========================= */
 .section .text
 .align 1
 .global main
 
 main:
-        /** Prologue: Saving RA and S registers to the stack */
+        /** Prologue: Allocate stack space and save registers */
         addi    sp, sp, -32
         sw      ra, 28(sp)
         sw      s0, 24(sp)
@@ -15,67 +37,63 @@ main:
         sw      s3, 12(sp)
         sw      s4, 8(sp)
 
-        /** ---- STRING PIPELINE ---- */
-        la      a0, test_string
-        jal     my_strcpy              # Copy to RAM buffer
-        
+        /** 1. STRING PIPELINE */
         la      a0, ram_buffer
-        jal     my_strtolower          # Convert to lowercase
+        la      a1, test_string
+        jal     my_strcpy
 
-        /** ---- INIT POINTERS & COUNTERS ---- */
-        la      s1, hex_buffer         # Pointer to hex buffer
-        la      s2, dec_buffer         # Pointer to dec buffer
+        la      a0, ram_buffer
+        jal     my_strtolower
+
+        /** 2. INIT POINTERS & COUNTERS */
+        la      s1, hex_buffer
+        la      s2, dec_buffer
         
-        li      s3, 0                  # s3 = hex counter (replaces t0)
-        li      s4, -10                # s4 = dec counter (replaces t1) 
-                                       # Note: Starting at -10 for testing readability
+        li      s3, 0               # s3 = hex counter (Saved register)
+        li      s4, -10             # s4 = dec counter (Saved register)
 
-/** =========================
- * MAIN LOOP
- * ========================= */
+/** 3. MAIN LOOP */
 loop:
-        /** ---- 1. PROCESS & PRINT HEX ---- */
-        mv      a0, s1                 # Destination buffer
-        mv      a1, s3                 # Value to convert
+        /** ---- HEX PART ---- */
+        mv      a0, s1              # Buffer
+        mv      a1, s3              # Value
         jal     hexToASCII
 
-        mv      a0, s1                 # Load buffer address to print
-        li      a7, 4                  # Syscall 4: Print String
-        ecall                          # Execute Print
-
-        # Print a space for formatting
-        li      a0, ' '
-        li      a7, 11                 # Syscall 11: Print Character
+        # PRINT HEX
+        mv      a0, s1
+        li      a7, 4               # Syscall: Print String
         ecall
 
-        /** ---- 2. PROCESS & PRINT DEC ---- */
-        mv      a0, s2                 # Destination buffer
-        mv      a1, s4                 # Value to convert
+        # PRINT SPACE
+        li      a0, ' '
+        li      a7, 11              # Syscall: Print Char
+        ecall
+
+        /** ---- DEC PART ---- */
+        mv      a0, s2              # Buffer
+        mv      a1, s4              # Value
         jal     decToASCII
 
-        mv      a0, s2                 # Load buffer address to print
-        li      a7, 4                  # Syscall 4: Print String
+        # PRINT DEC
+        mv      a0, s2
+        li      a7, 4               # Syscall: Print String
         ecall
 
-        # Print a newline for formatting
+        # PRINT NEWLINE
         li      a0, '\n'
-        li      a7, 11                 # Syscall 11: Print Character
+        li      a7, 11              # Syscall: Print Char
         ecall
 
-        /** ---- 3. UPDATE COUNTERS ---- */
-        addi    s3, s3, 1              # Increment hex counter
+        /** ---- UPDATE COUNTERS ---- */
+        addi    s3, s3, 1           # Increment Hex
         li      t2, 0xFFFF
-        and     s3, s3, t2             # Keep it within 16-bit range
+        and     s3, s3, t2          # Mask to 16-bit
 
-        addi    s4, s4, 1              # Increment dec counter
+        addi    s4, s4, 1           # Increment Dec
 
-        # Optional: Add a break condition or small loop limit here
-        # For now, this will loop continuously as requested
-        j       loop
+        j       loop                # Infinite Loop
 
-/** =========================
- * EPILOG (If loop ever exits)
- * ========================= */
+/** EPILOG (Safeguard) */
         lw      s4, 8(sp)
         lw      s3, 12(sp)
         lw      s2, 16(sp)
