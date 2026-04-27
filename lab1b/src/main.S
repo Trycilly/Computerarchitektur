@@ -81,7 +81,8 @@ loop:
         jal     hexToASCII
 
         addi    t0, t0, 1
-        andi    t0, t0, 0xFFFF
+        li t2, 0xFFFF
+        and t0, t0, t2
 
 
         /** ---- DEC ---- */
