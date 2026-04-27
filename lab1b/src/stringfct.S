@@ -1,3 +1,12 @@
+/**
+ * \file stringfct.S
+ * \brief String manipulation routines for lab1b.
+ *
+ * This file implements three assembler routines:
+ *  - my_strlen: returns length of NUL-terminated ASCII string
+ *  - my_strcpy: copies an ASCIIZ string from source to destination
+ *  - my_strtolower: converts upper-case ASCII letters to lower-case in-place
+ */ 
         .text
         .align 1
 
@@ -78,4 +87,4 @@ my_strtolower:
 /** Compute and return string length */
 .lower_done:
         sub     a0, t0, t1                              # length = end_ptr - start_ptr 
-        ret                                             # return to caller /**
+        ret                                             # return to caller 
