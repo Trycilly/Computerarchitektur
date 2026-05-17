@@ -110,13 +110,15 @@ void clock_time_set_timezone(timezones_t tz) {
 
 
 void clock_time_change_hour_utc(int change_value) {
-    assert (change_value >= 0 && change_value < 24);
+    //assert (change_value >= 0 && change_value < 24);
 
-    hours += change_value;
+    //hours += change_value;
+    hours = wrap24(hours + change_value);
 }
 
 void clock_time_change_minute_utc(int change_value) {
-    assert (change_value >= 0 && change_value < 60);
+    //assert (change_value >= 0 && change_value < 60);
 
-    minutes += change_value;
+    //minutes += change_value;
+    minutes = wrap60(minutes + change_value);
 }
