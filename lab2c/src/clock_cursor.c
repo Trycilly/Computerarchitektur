@@ -30,11 +30,28 @@
  */
 static pos_t cursor_pos = {120, 120};
 /** @TODO: You may need to add more local data */
+#include <stdint.h>
+#include <stdbool.h>
 
+static bool cursor_visible = false;
+static uint64_t last_move_time = 0;
+
+static clock_cursor_edit_t cursor_edit = CURSOR_EDIT_NONE;
+
+static box_t hour_box;
+static box_t min_box;
+/** END OF TODO */
 
 void clock_cursor_init(box_t box_hour, box_t box_minute)
 {
     /** @TODO: You need to implement the initialization */
+    hour_box = box_hour;
+    min_box  = box_minute;
+
+    cursor_visible = false;
+    cursor_edit = CURSOR_EDIT_NONE;
+    last_move_time = 0;
+    /** END OF TODO */
 }
 
 /*
@@ -43,7 +60,13 @@ void clock_cursor_init(box_t box_hour, box_t box_minute)
 static int16_t adc_to_pos_value(uint16_t adc)
 {
     /** @TODO: You need to implement logic */
+    // center ~2048 (12-bit ADC)
+    int16_t centered = (int16_t)adc - 2048;
+
+    if (centered > 200 || centered < -200)
+        return centered / 512;   // slow movement
     return 0;
+    /** END OF TODO */
 }
 
 /*
@@ -52,14 +75,33 @@ static int16_t adc_to_pos_value(uint16_t adc)
 static int16_t adc_to_timechange_value(uint16_t adc)
 {
     /** @TODO: You need to implement logic */
+    int16_t centered = (int16_t)adc - 2048;
+
+    if (centered > 800) return 5;
+    if (centered > 200) return 1;
+    if (centered < -800) return -5;
+    if (centered < -200) return -1;
+
     return 0;
+    /** END OF TODO */
 }
 
 
 bool clock_cursor_update(uint64_t tick_us)
 {
     /** @TODO: You need to implement logic */
+    // hide cursor after 5 seconds
+    if (cursor_visible && (tick_us - last_move_time > CURSOR_VISIBLE_TIME)) {
+        cursor_visible = false;
+        cursor_edit = CURSOR_EDIT_NONE;
+        return true;
+    }
+
+    // TODO: joystick read assumed elsewhere OR via ADC global
+    // (template usually provides ADC read elsewhere)
+
     return false;
+    /** END OF TODO */
 }
 
 clock_cursor_edit_t clock_cursor_get_state(pos_t *pos, bool *visible)
