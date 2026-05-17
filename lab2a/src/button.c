@@ -45,13 +45,13 @@ void gpio_callback(uint gpio, uint32_t events)
     // Current timestamp
     absolute_time_t now = get_absolute_time();
 
-    // Debounce:
-    // Ignore repeated identical events within debounce interval
-    if ((events == last_event) &&
-        (absolute_time_diff_us(last_interrupt_time, now) < (DEBOUNCE_MS * 1000)))
+    /* Debounce: ignore ANY event within 50ms */
+    if (absolute_time_diff_us(last_interrupt_time, now) < (DEBOUNCE_MS * 1000))
     {
         return;
     }
+
+    last_interrupt_time = now;
 
     // Save timestamp of this interrupt
     last_interrupt_time = now;
