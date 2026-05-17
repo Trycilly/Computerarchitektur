@@ -29,7 +29,20 @@ static timezone_def_t timezone_def[] = {
 
 
 /** @TODO: You may need to add/change logic!!! */
+static int wrap24(int h)
+{
+    if (h < 0) return 23;
+    if (h > 23) return 0;
+    return h;
+}
 
+static int wrap60(int v)
+{
+    if (v < 0) return 59;
+    if (v > 59) return 0;
+    return v;
+}
+/** END OF TODO */
 
 bool clock_time_inc_second(uint64_t tick_us)
 {
@@ -75,9 +88,18 @@ void clock_time_get_local(int * hour, int * minute, int * second) {
 
     /** @TODO: You may need to add/change logic */
 
-    *hour = (hours + timezone_offset_hours) % 24;
+    //*hour = (hours + timezone_offset_hours) % 24;
+    //*minute = minutes;
+    //*second = seconds;
+    int h = hours + timezone_offset_hours;
+
+    if (h < 0) h += 24;
+    if (h >= 24) h -= 24;
+
+    *hour = h;
     *minute = minutes;
     *second = seconds;
+    /** END OF TODO */
 }
 
 void clock_time_set_timezone(timezones_t tz) {
