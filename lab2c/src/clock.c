@@ -31,15 +31,22 @@ int main()
 
         
         /** @TODO: You may need to add/change logic */    
+        static uint64_t last_gui_update = 0;
+        /** END OF TODO */
 
         // Check the cursor for movement / and whether it's supposed to hide (after a few seconds)
         if (clock_cursor_update(tick_us))
             update_gui = true;
+        
+        // time update (1 Hz) TODO ADDED LOGIC
+        if (clock_time_inc_second(tick_us))
+        update_gui = true;
 
         clock_cursor_edit_t edit = clock_cursor_get_state(NULL, NULL);
 
         // Only update the seconds, if we're not updating the hours / minutes with the cursor
-        if (edit == CURSOR_EDIT_NONE && clock_time_inc_second(tick_us))
+        //if (edit == CURSOR_EDIT_NONE && clock_time_inc_second(tick_us))
+        if (edit != CURSOR_EDIT_NONE) // TODO CHANGED LOGIC
             update_gui = true;
         
         // If the time is edited (hour or minute) we need to update the GUI
