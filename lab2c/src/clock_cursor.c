@@ -90,6 +90,7 @@ static int16_t adc_to_timechange_value(uint16_t adc)
 bool clock_cursor_update(uint64_t tick_us)
 {
     /** @TODO: You need to implement logic */
+    //return false;
     // hide cursor after 5 seconds
     if (cursor_visible && (tick_us - last_move_time > CURSOR_VISIBLE_TIME)) {
         cursor_visible = false;
@@ -97,10 +98,56 @@ bool clock_cursor_update(uint64_t tick_us)
         return true;
     }
 
-    // TODO: joystick read assumed elsewhere OR via ADC global
-    // (template usually provides ADC read elsewhere)
-
-    return false;
+    // Read joystick X axis
+    adc_select_input(0);
+    uint16_t adc_x = adc_read();
+    
+    // Read joystick Y axis
+    adc_select_input(1);
+    uint16_t adc_y = adc_read();
+    
+    // Cursor movement when not editing
+    if (cursor_edit == CURSOR_EDIT_NONE)
+    {
+        int16_t dx = adc_to_pos_value(adc_x);
+        int16_t dy = adc_to_pos_value(adc_y);
+    
+        if (dx != 0 || dy != 0)
+        {
+            cursor_pos.x += dx;
+            cursor_pos.y += dy;
+    
+            // Keep cursor inside display
+            if (cursor_pos.x < 0) cursor_pos.x = 0;
+            if (cursor_pos.x > 239) cursor_pos.x = 239;
+    
+            if (cursor_pos.y < 0) cursor_pos.y = 0;
+            if (cursor_pos.y > 239) cursor_pos.y = 239;
+    
+            cursor_visible = true;
+            last_move_time = tick_us;
+    
+            changed = true;
+        }
+    }
+    else
+    {
+        // Time editing mode
+        int16_t change = adc_to_timechange_value(adc_y);
+    
+        if (change != 0)
+        {
+            if (cursor_edit == CURSOR_EDIT_HOUR)
+                clock_time_change_hour_utc(change);
+    
+            if (cursor_edit == CURSOR_EDIT_MINUTE)
+                clock_time_change_minute_utc(change);
+    
+            changed = true;
+        }
+    }
+    
+    return changed;
     /** END OF TODO */
 }
 
