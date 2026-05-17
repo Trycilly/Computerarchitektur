@@ -45,9 +45,10 @@ int main()
         clock_cursor_edit_t edit = clock_cursor_get_state(NULL, NULL);
 
         // Only update the seconds, if we're not updating the hours / minutes with the cursor
-        //if (edit == CURSOR_EDIT_NONE && clock_time_inc_second(tick_us))
-        if (edit != CURSOR_EDIT_NONE) // TODO CHANGED LOGIC
+        /* commented out, so the clock doesn't stop in editing mode
+        if (edit == CURSOR_EDIT_NONE && clock_time_inc_second(tick_us))
             update_gui = true;
+        */
         
         // If the time is edited (hour or minute) we need to update the GUI
         if (edit != CURSOR_EDIT_NONE)
