@@ -1,3 +1,5 @@
+/* Done by Dominic Sehorz & Alen Osmanagic*/
+
 /**
  * @file Implements the main loop initializing components
  */
