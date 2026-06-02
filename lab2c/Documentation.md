@@ -371,7 +371,7 @@ The system was compiled with `SELECT_12HOURS == 1` and initialized via test case
 
 ```
 
-> **Implementation Detail:** As required by Section A.2 of the user manual, numbers less than 10 are rendered without leading zeros in the final user interface string (e.g., `1:00:00 PM` instead of `01:00:00 PM`), maintaining clean spacing layouts.
+> **Implementation Detail:** As required by Section A.2 of the user manual, numbers less than 10 are rendered without leading zeros in the final user interface string (e.g., `1:0 PM` instead of `01:00 PM`), maintaining clean spacing layouts.
 
 ### 6.3 Usability Engineering & Optimization Reflections
 
