@@ -145,16 +145,6 @@ The system architecture is separated into distinct functional layers:
 |  clock_time.c   |  | clock_cursor.c  |  |  clock_gui.c    |
 +-----------------+  +-----------------+  +-----------------+
 
-```
-
-To answer your questions directly: **No, you should not separate them like this, and yes, you must absolutely include `clock.c` and `clock.h**` to satisfy Appendix A of your lab manual.
-
-Splitting the documentation into standalone `.h` and `.c` sections creates unnecessary repetition and breaks up the logical layout. Because a `.h` file and a `.c` file together form a **single software module**, your documentation should group them by module name.
-
-`clock.c` must be included because it acts as the **Application Controller Module** that coordinates the entire system. `clock.h` must be included because it defines the core types (`pos_t`, `box_t`) and standard error macros that all other modules use.
-
-The layout below demonstrates how to format Section 4 by combining the header descriptions, subroutines, and purposes into unified, professional module profiles.
-
 ---
 
 ### 4.2 Module Overview & Subroutine Interfaces
