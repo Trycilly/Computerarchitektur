@@ -1,3 +1,5 @@
+/* Done by Alen Osmanagic */
+
 /**
  * @file Time (and later date?) handling
  */
