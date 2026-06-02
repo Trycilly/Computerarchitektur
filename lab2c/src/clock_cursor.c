@@ -183,19 +183,19 @@
         /* Edit mode: joystick Y changes hour or minute */
         int16_t change = adc_to_timechange_value(adc_y);
         
-        // Timer, um zu merken, wann wir das letzte Mal geschaltet haben
+        // Timer to track when the las adjustment was made
         static uint64_t last_edit_time = 0;
 
         if (change != 0) {
-            // HIER STEUERST DU DIE GESCHWINDIGKEIT (Zeit in Mikrosekunden):
-            // Leicht gedrückt (1 oder -1) -> Warte 500ms bis zum nächsten Schritt
-            // Stark gedrückt  (2 oder -2) -> Warte 150ms (schnelles Durchlaufen)
+            // Adjust speed here (Time in microseconds):
+            // Lightly pressed  (1 or -1) -> Wait 500ms until the next step
+            // Frimly pressed  (2 or -2) -> Wait 150ms (fast scrolling)
             uint64_t speed_delay = (change == 2 || change == -2) ? (150 * 1000) : (500 * 1000);
 
             if (tick_us - last_edit_time >= speed_delay) {
                 
-                // Wir zwingen den Schritt auf 1 oder -1, damit die Zahlen 
-                // beim schnellen Durchlaufen nicht in Zweierschritten springen
+                // Force the step to 1 or -1 so that the numbers 
+                // do not skip by intervals of two during fast scrolling
                 int16_t step = (change > 0) ? 1 : -1;
 
                 if (cursor_edit == CURSOR_EDIT_HOUR)
@@ -210,32 +210,11 @@
             }
         }
         else {
-            // Wenn der Joystick in der Mitte ist, sofort zurücksetzen.
-            // Dadurch reagiert der nächste "Tipp" ohne Verzögerung.
+            // If joystick is centered, reset immediately.
+            // This ensures the next "tap" reacts without any delay.
             last_edit_time = 0;
         }
     }
-        // Test ich weiß nicht mhehr wie der Joystick sich richtig verhält, aber da "Pull Up" kleinere ADC-Werte liefert, müssen wir das Vorzeichen umkehren, um die Zeit zu ERHÖHEN.
-        // else {
-        //     /* Edit mode: joystick Y changes hour or minute */
-        //     int16_t change = adc_to_timechange_value(adc_y);
-
-        //     if (change != 0) {
-        //         // INVERTIEREN: Da "Pull Up" kleinere ADC-Werte liefert (-), 
-        //         // müssen wir das Vorzeichen umkehren, um die Zeit zu ERHÖHEN (+).
-        //         int16_t actual_change = -change; 
-
-        //         if (cursor_edit == CURSOR_EDIT_HOUR)
-        //             clock_time_change_hour_utc(actual_change);
-        //         else
-        //             clock_time_change_minute_utc(actual_change);
-
-        //         /* Keep cursor alive while actively editing */
-        //         last_move_time = tick_us;
-        //         changed = true;
-        //     }
-        // }
-
         return changed;
     }
 
