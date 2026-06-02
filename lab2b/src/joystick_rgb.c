@@ -1,3 +1,5 @@
+/* Done by Dominic Sehorz */
+
 /**
  * \file Make the Joystick steer the RGB-LED.
  * The Joystick has two potentionmeter for the X- and the Y-axis.
