@@ -1,0 +1,181 @@
+╔════════════════════════════════════════════════════════════════════╗
+║           12-HOUR / 24-HOUR CLOCK MODE QUICK REFERENCE            ║
+╚════════════════════════════════════════════════════════════════════╝
+
+TOGGLE MODE IN CODE:
+────────────────────────────────────────────────────────────────────
+
+  C Version:     Edit src/clock_time.h, line 14:
+                 #define SELECT_12HOURS 1    /* 1=12h, 0=24h */
+
+  HCS12 Version: Edit clock_12h.asm, line 1:
+                 SELECT12HOURS: EQU 1        ; 1=12h, 0=24h
+
+CRITICAL OVERFLOW TRANSITIONS (All Tested):
+────────────────────────────────────────────────────────────────────
+
+  ✓ Noon:         11:59:59 AM  →  12:00:00 PM
+  ✓ Afternoon:    12:59:59 PM  →  01:00:00 PM
+  ✓ Midnight:     11:59:59 PM  →  12:00:00 AM
+  ✓ Early AM:     12:59:59 AM  →  01:00:00 AM
+
+TIME DISPLAY FORMAT:
+────────────────────────────────────────────────────────────────────
+
+  24h Mode:   HH:MM:SS
+              00:00:00  (midnight)
+              12:30:45  (afternoon)
+              23:59:59  (late night)
+
+  12h Mode:   HH:MM:SS AM/PM
+              12:00:00 AM  (midnight)
+              12:30:00 PM  (noon)
+              01:30:45 PM  (afternoon)
+              11:59:59 PM  (late night)
+
+HOUR CONVERSION TABLE (12h Mode):
+────────────────────────────────────────────────────────────────────
+
+  00:xx  →  12:xx AM       11:xx  →  11:xx AM
+  01:xx  →  01:xx AM       12:xx  →  12:xx PM
+  02:xx  →  02:xx AM       13:xx  →  01:xx PM
+  03:xx  →  03:xx AM       14:xx  →  02:xx PM
+  04:xx  →  04:xx AM       15:xx  →  03:xx PM
+  05:xx  →  05:xx AM       16:xx  →  04:xx PM
+  06:xx  →  06:xx AM       17:xx  →  05:xx PM
+  07:xx  →  07:xx AM       18:xx  →  06:xx PM
+  08:xx  →  08:xx AM       19:xx  →  07:xx PM
+  09:xx  →  09:xx AM       20:xx  →  08:xx PM
+  10:xx  →  10:xx AM       21:xx  →  09:xx PM
+
+CONDITIONAL COMPILATION (C):
+────────────────────────────────────────────────────────────────────
+
+  #if SELECT_12HOURS == 1
+      /* 12-hour mode code */
+      bool is_pm = clock_time_is_pm();
+  #else
+      /* 24-hour mode code */
+  #endif
+
+CONDITIONAL COMPILATION (HCS12):
+────────────────────────────────────────────────────────────────────
+
+  IF SELECT12HOURS == 1
+      ; 12-hour mode code
+      am_pm: DS.B 1
+  ELSE
+      ; 24-hour mode code
+  ENDIF
+
+TESTING:
+────────────────────────────────────────────────────────────────────
+
+  C Version:
+    1. Call clock_time_run_tests() in your main()
+    2. Runs 7 comprehensive tests
+    3. Validates all overflow transitions
+    4. Output: Pass/Fail summary with detailed results
+
+  HCS12 Version:
+    1. Call test_12h_transitions routine
+    2. Sets test_result to 1 (pass) or 0 (fail)
+    3. Validates all critical 12h transitions
+
+FILES MODIFIED:
+────────────────────────────────────────────────────────────────────
+
+  ✓ src/clock_time.h           - Added SELECT_12HOURS define
+  ✓ src/clock_time.c           - Updated format function
+  ✓ src/clock.c                - Added conditional button logic
+  ✓ src/CMakeLists.txt         - Added test file
+
+FILES CREATED:
+────────────────────────────────────────────────────────────────────
+
+  ✓ clock_12h.asm              - HCS12 assembly implementation
+  ✓ src/clock_time_test.c      - Unit test suite
+  ✓ 12H_MODE_DOCUMENTATION.md  - Technical details
+  ✓ 12H_README.md              - This quick start guide
+
+HARDWARE SETUP (12h Mode Button):
+────────────────────────────────────────────────────────────────────
+
+  GPIO2 → Button → GND
+          with pull-up resistor (internal or external)
+
+  Button press: Toggles between 12h display and 24h display
+  (Only active when SELECT_12HOURS == 1)
+
+KEY FUNCTIONS:
+────────────────────────────────────────────────────────────────────
+
+  clock_time_inc_second()        - Increment by 1 second
+  clock_time_set_utc()           - Set specific time
+  clock_time_get_utc()           - Get current UTC time
+  clock_time_get_local()         - Get local time (with timezone)
+  clock_time_format_string()     - Format for display
+  clock_time_is_pm()             - Check AM/PM (12h mode only)
+  clock_time_run_tests()         - Run test suite
+
+INTERNAL TIME REPRESENTATION:
+────────────────────────────────────────────────────────────────────
+
+  Always stored in 24-hour format (0-23 hours)
+  Conversion to 12h happens only at display time
+  Formula: display_hour = hour % 12; if (hour % 12 == 0) hour = 12;
+
+MEMORY USAGE (Assembler):
+────────────────────────────────────────────────────────────────────
+
+  24h Mode:  hours (1 byte), minutes (1 byte), seconds (1 byte) = 3 bytes
+  12h Mode:  + am_pm (1 byte) = 4 bytes total
+
+CASCADE OVERFLOW LOGIC:
+────────────────────────────────────────────────────────────────────
+
+  seconds: 0-59  →  rolls over to 0, increments minutes
+  minutes: 0-59  →  rolls over to 0, increments hours
+  hours:   0-23  →  rolls over to 0 (day boundary)
+
+EXAMPLE USAGE:
+────────────────────────────────────────────────────────────────────
+
+  // Set to 11:59:59 AM (internal: 11:59:59)
+  clock_time_set_utc(11, 59, 59);
+
+  // Increment by 1 second
+  clock_time_inc_second(time_us_64());
+
+  // Result: 12:00:00 (displays as 12:00:00 PM in 12h mode)
+
+  // Get current time
+  int h, m, s;
+  clock_time_get_utc(&h, &m, &s);
+  // h=12, m=0, s=0
+
+  // Format for display
+  char buf[32];
+  clock_time_format_string(buf, h, m, s, true);  // 12h format
+  // Result: "12:00:00 PM"
+
+NOTES:
+────────────────────────────────────────────────────────────────────
+
+  ✓ All overflow transitions validated by comprehensive tests
+  ✓ Button debouncing implemented (GPIO2)
+  ✓ Timezone offsets preserved in local time functions
+  ✓ Code is production-ready with zero-padded display
+  ✓ HCS12 assembly uses standard CodeWarrior syntax
+  ✓ C version compatible with C99+
+
+REFERENCES:
+────────────────────────────────────────────────────────────────────
+
+  12-Hour Clock: https://en.wikipedia.org/wiki/12-hour_clock
+  HCS12 Docs: CodeWarrior → Assembler → Conditional Directives
+  Wikipedia references all critical transitions
+
+╔════════════════════════════════════════════════════════════════════╗
+║                     END OF QUICK REFERENCE                        ║
+╚════════════════════════════════════════════════════════════════════╝

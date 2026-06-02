@@ -1,0 +1,98 @@
+{
+	"kind" : "toolchains",
+	"toolchains" : 
+	[
+		{
+			"compiler" : 
+			{
+				"implicit" : {},
+				"path" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/external/usr/bin/riscv32-unknown-elf-gcc.exe"
+			},
+			"language" : "ASM"
+		},
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/lib/gcc/riscv32-unknown-elf/15.1.0/include",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/riscv32-unknown-elf/include"
+					],
+					"linkDirectories" : 
+					[
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/lib/gcc/riscv32-unknown-elf/15.1.0/rv32imac_zicsr_zifencei_zaamo_zalrsc_zba_zbb_zbkb_zbs/ilp32",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/riscv32-unknown-elf/lib/rv32imac_zicsr_zifencei_zaamo_zalrsc_zba_zbb_zbkb_zbs/ilp32",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/lib/gcc/riscv32-unknown-elf/15.1.0",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/lib/gcc",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/riscv32-unknown-elf/lib"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : []
+				},
+				"path" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-gcc.exe",
+				"version" : "15.1.0"
+			},
+			"language" : "C",
+			"sourceFileExtensions" : 
+			[
+				"c",
+				"m"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/riscv32-unknown-elf/include/c++/15.1.0",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/riscv32-unknown-elf/include/c++/15.1.0/riscv32-unknown-elf",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/riscv32-unknown-elf/include/c++/15.1.0/backward",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/lib/gcc/riscv32-unknown-elf/15.1.0/include",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/lib/gcc/riscv32-unknown-elf/15.1.0/include-fixed",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/riscv32-unknown-elf/include"
+					],
+					"linkDirectories" : 
+					[
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/lib/gcc/riscv32-unknown-elf/15.1.0",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/lib/gcc",
+						"C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/riscv32-unknown-elf/lib"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : []
+				},
+				"path" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-g++.exe",
+				"version" : "15.1.0"
+			},
+			"language" : "CXX",
+			"sourceFileExtensions" : 
+			[
+				"C",
+				"M",
+				"c++",
+				"cc",
+				"cpp",
+				"cxx",
+				"mm",
+				"mpp",
+				"CPP",
+				"ixx",
+				"cppm",
+				"ccm",
+				"cxxm",
+				"c++m"
+			]
+		}
+	],
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 1
+	}
+}

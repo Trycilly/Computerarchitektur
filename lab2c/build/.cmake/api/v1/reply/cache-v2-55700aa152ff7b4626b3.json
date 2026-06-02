@@ -1,0 +1,2139 @@
+{
+	"entries" : 
+	[
+		{
+			"name" : "CMAKE_ADDR2LINE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-addr2line.exe"
+		},
+		{
+			"name" : "CMAKE_AR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-ar.exe"
+		},
+		{
+			"name" : "CMAKE_ASM_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "ASM compiler"
+				}
+			],
+			"type" : "STRING",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/external/usr/bin/riscv32-unknown-elf-gcc.exe"
+		},
+		{
+			"name" : "CMAKE_ASM_COMPILER_AR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/external/usr/bin/riscv32-unknown-elf-gcc-ar.exe"
+		},
+		{
+			"name" : "CMAKE_ASM_COMPILER_RANLIB",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/external/usr/bin/riscv32-unknown-elf-gcc-ranlib.exe"
+		},
+		{
+			"name" : "CMAKE_ASM_COMPILER_WORKS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "CMAKE_ASM_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the ASM compiler during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-march=rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb -mabi=ilp32"
+		},
+		{
+			"name" : "CMAKE_ASM_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the ASM compiler during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-O0 -g"
+		},
+		{
+			"name" : "CMAKE_ASM_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the ASM compiler during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-g -Os -DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_ASM_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the ASM compiler during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-g -O3 -DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_ASM_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the ASM compiler during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-O2 -g -DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_BUILD_TYPE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Choose the type of build, options are: 'Debug', 'Release', 'MinSizeRel', 'RelWithDebInfo'."
+				},
+				{
+					"name" : "STRINGS",
+					"value" : "Debug;Release;MinSizeRel;RelWithDebInfo"
+				}
+			],
+			"type" : "STRING",
+			"value" : "Release"
+		},
+		{
+			"name" : "CMAKE_CACHEFILE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "This is the directory where this CMakeCache.txt was created"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "c:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/lab2c/build"
+		},
+		{
+			"name" : "CMAKE_CACHE_MAJOR_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Major version of cmake used to create the current loaded cache"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "4"
+		},
+		{
+			"name" : "CMAKE_CACHE_MINOR_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Minor version of cmake used to create the current loaded cache"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "3"
+		},
+		{
+			"name" : "CMAKE_CACHE_PATCH_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Patch version of cmake used to create the current loaded cache"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "CMAKE_COMMAND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to CMake executable."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Program Files/CMake/bin/cmake.exe"
+		},
+		{
+			"name" : "CMAKE_CPACK_COMMAND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to cpack program executable."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Program Files/CMake/bin/cpack.exe"
+		},
+		{
+			"name" : "CMAKE_CTEST_COMMAND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to ctest program executable."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Program Files/CMake/bin/ctest.exe"
+		},
+		{
+			"name" : "CMAKE_CXX_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "CXX compiler"
+				}
+			],
+			"type" : "STRING",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-g++.exe"
+		},
+		{
+			"name" : "CMAKE_CXX_COMPILER_AR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-gcc-ar.exe"
+		},
+		{
+			"name" : "CMAKE_CXX_COMPILER_RANLIB",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-gcc-ranlib.exe"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-march=rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb -mabi=ilp32"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-O0 -g"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-g -Os -DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-g -O3 -DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-O2 -g -DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_C_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "C compiler"
+				}
+			],
+			"type" : "STRING",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-gcc.exe"
+		},
+		{
+			"name" : "CMAKE_C_COMPILER_AR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-gcc-ar.exe"
+		},
+		{
+			"name" : "CMAKE_C_COMPILER_RANLIB",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-gcc-ranlib.exe"
+		},
+		{
+			"name" : "CMAKE_C_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the C compiler during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-march=rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb -mabi=ilp32"
+		},
+		{
+			"name" : "CMAKE_C_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the C compiler during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-O0 -g"
+		},
+		{
+			"name" : "CMAKE_C_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the C compiler during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-g -Os -DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_C_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the C compiler during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-g -O3 -DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_C_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the C compiler during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-O2 -g -DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_DLLTOOL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/ucrt64/bin/dlltool.exe"
+		},
+		{
+			"name" : "CMAKE_EDIT_COMMAND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to cache edit program executable."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Program Files/CMake/bin/cmake-gui.exe"
+		},
+		{
+			"name" : "CMAKE_EXECUTABLE_FORMAT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Executable file format"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ELF"
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXPORT_BUILD_DATABASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enable/Disable output of build database during the build."
+				}
+			],
+			"type" : "BOOL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXPORT_COMPILE_COMMANDS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enable/Disable output of compile commands during generation."
+				}
+			],
+			"type" : "BOOL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXTRA_GENERATOR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of external makefile project generator."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_FIND_PACKAGE_REDIRECTS_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake."
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/lab2c/build/CMakeFiles/pkgRedirects"
+		},
+		{
+			"name" : "CMAKE_GENERATOR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of generator."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "Ninja"
+		},
+		{
+			"name" : "CMAKE_GENERATOR_INSTANCE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Generator instance identifier."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_GENERATOR_PLATFORM",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of generator platform."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_GENERATOR_TOOLSET",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of generator toolset."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_HOME_DIRECTORY",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Source directory with the top level CMakeLists.txt file for this project"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/lab2c"
+		},
+		{
+			"name" : "CMAKE_INSTALL_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Install path prefix, prepended onto install directories."
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/Program Files (x86)/lab2a"
+		},
+		{
+			"name" : "CMAKE_LINKER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-ld.exe"
+		},
+		{
+			"name" : "CMAKE_LIST_FILE_NAME",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of CMakeLists files to read"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "CMakeLists.txt"
+		},
+		{
+			"name" : "CMAKE_MAKE_PROGRAM",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Program used to build from build.ninja files."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/ninja.exe"
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_NM",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-nm.exe"
+		},
+		{
+			"name" : "CMAKE_NUMBER_OF_MAKEFILES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "number of local generators"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "109"
+		},
+		{
+			"name" : "CMAKE_OBJCOPY",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/external/usr/bin/riscv32-unknown-elf-objcopy.exe"
+		},
+		{
+			"name" : "CMAKE_OBJDUMP",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/external/usr/bin/riscv32-unknown-elf-objdump.exe"
+		},
+		{
+			"name" : "CMAKE_PLATFORM_INFO_INITIALIZED",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Platform information initialized"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "CMAKE_PROJECT_COMPAT_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_PROJECT_DESCRIPTION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_PROJECT_HOMEPAGE_URL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_PROJECT_NAME",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "lab2a"
+		},
+		{
+			"name" : "CMAKE_PROJECT_SPDX_LICENSE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_RANLIB",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-ranlib.exe"
+		},
+		{
+			"name" : "CMAKE_READELF",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-readelf.exe"
+		},
+		{
+			"name" : "CMAKE_ROOT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to CMake installation."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Program Files/CMake/share/cmake-4.3"
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_SKIP_INSTALL_RPATH",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "If set, runtime paths are not added when installing shared libraries, but are added when building."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "NO"
+		},
+		{
+			"name" : "CMAKE_SKIP_RPATH",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "If set, runtime paths are not added when using shared libraries."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "NO"
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the archiver during the creation of static libraries during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the archiver during the creation of static libraries during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the archiver during the creation of static libraries during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the archiver during the creation of static libraries during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the archiver during the creation of static libraries during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STRIP",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/bin/riscv32-unknown-elf-strip.exe"
+		},
+		{
+			"name" : "CMAKE_TAPI",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "CMAKE_TAPI-NOTFOUND"
+		},
+		{
+			"name" : "CMAKE_TOOLCHAIN_FILE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The CMake toolchain file"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/cmake/preload/toolchains/pico_riscv_gcc.cmake"
+		},
+		{
+			"name" : "CMAKE_VERBOSE_MAKEFILE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "If this value is on, makefiles will be generated without the .SILENT directive, and all commands will be echoed to the console during the make.  This is useful for debugging only. With Visual Studio IDE projects all commands are done without /nologo."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "FALSE"
+		},
+		{
+			"name" : "DOXYGEN_DOT_EXECUTABLE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dot tool for use with Doxygen"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "DOXYGEN_DOT_EXECUTABLE-NOTFOUND"
+		},
+		{
+			"name" : "DOXYGEN_EXECUTABLE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Doxygen documentation generation tool (https://www.doxygen.nl)"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "DOXYGEN_EXECUTABLE-NOTFOUND"
+		},
+		{
+			"name" : "FAMILY_MCUS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "RP2040"
+		},
+		{
+			"name" : "FETCHCONTENT_BASE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Directory under which to collect all populated content"
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/lab2c/build/_deps"
+		},
+		{
+			"name" : "FETCHCONTENT_FULLY_DISCONNECTED",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Disables all attempts to download or update content and assumes source dirs already exist"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "FETCHCONTENT_QUIET",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enables QUIET option for all content population"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "ON"
+		},
+		{
+			"name" : "FETCHCONTENT_UPDATES_DISCONNECTED",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enables UPDATE_DISCONNECTED behavior for all content population"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_Python3",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding Python3"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[C:/Users/domin/AppData/Local/Programs/Python/Python312/python.exe][found components: Interpreter ][v3.12.4()]"
+		},
+		{
+			"name" : "NO_WARN_RWX_SEGMENTS_SUPPORTED",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "0"
+		},
+		{
+			"name" : "PICO_32BIT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "PICO_ARM",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "0"
+		},
+		{
+			"name" : "PICO_BOARD",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "PICO target board (e.g. pico, pico2)"
+				}
+			],
+			"type" : "STRING",
+			"value" : "waveshare_rp2350_lcd_1.28"
+		},
+		{
+			"name" : "PICO_BOARD_HEADER_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "PICO board header directories"
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "PICO_BOOT_STAGE2_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2350/boot_stage2"
+		},
+		{
+			"name" : "PICO_BUILD_DOCS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Build HTML Doxygen docs"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "PICO_CMAKE_PRELOAD_PLATFORM_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/cmake/preload/platforms"
+		},
+		{
+			"name" : "PICO_CMAKE_PRELOAD_PLATFORM_FILE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/cmake/preload/platforms/rp2350-riscv.cmake"
+		},
+		{
+			"name" : "PICO_COMPILER_ASM",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/external/usr/bin/riscv32-unknown-elf-gcc.exe"
+		},
+		{
+			"name" : "PICO_COMPILER_CC",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/external/usr/bin/riscv32-unknown-elf-gcc.exe"
+		},
+		{
+			"name" : "PICO_COMPILER_CXX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/external/usr/bin/riscv32-unknown-elf-g++.exe"
+		},
+		{
+			"name" : "PICO_COPY_TO_RAM",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Default binaries to copy code to RAM when booting from flash"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "PICO_DEBUG_INFO_IN_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Include debug info in release builds"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "ON"
+		},
+		{
+			"name" : "PICO_DEFAULT_BOOT_STAGE2",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "boot stage 2 short name"
+				}
+			],
+			"type" : "STRING",
+			"value" : "compile_time_choice"
+		},
+		{
+			"name" : "PICO_DOXYGEN_ENABLED_SECTIONS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "rp2350_specific"
+		},
+		{
+			"name" : "PICO_DOXYGEN_EXCLUDE_PATHS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2350/hardware_regs;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/cmsis"
+		},
+		{
+			"name" : "PICO_DOXYGEN_PATHS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/boot_picobin_headers;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/boot_picoboot_headers;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/boot_uf2_headers;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/pico_base_headers;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/pico_usb_reset_interface_headers;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/pico_bit_ops_headers;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/pico_binary_info;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/pico_divider_headers;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/pico_sync;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/pico_time;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/pico_util;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/pico_stdlib_headers;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/common/hardware_claim;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2350/pico_platform;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2350/hardware_regs;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2350/hardware_structs;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2350/boot_stage2;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_base;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_adc;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_boot_lock;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_clocks;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_divider;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_dma;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_exception;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_flash;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_gpio;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_i2c;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_interp;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_irq;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_pio;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_pll;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_pwm;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_resets;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_spi;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_sync;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_sync_spin_lock;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_ticks;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_timer;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_uart;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_vreg;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_watchdog;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_xip_cache;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_xosc;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_powman;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_riscv_platform_timer;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_sha256;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_dcp;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_rcp;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_riscv;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/hardware_hazard3;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/boot_bootrom_headers;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_platform_common;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_platform_compiler;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_platform_sections;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_platform_panic;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_aon_timer;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_bootrom;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_bootsel_via_double_reset;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_multicore;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_unique_id;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_atomic;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_bit_ops;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_divider;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_double;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_int64_ops;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_flash;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_float;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_mem_ops;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_malloc;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_printf;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_rand;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_sha256;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_stdio_semihosting;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_stdio_uart;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_stdio_rtt;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/tinyusb;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_stdio_usb;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_i2c_slave;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_async_context;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_btstack;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_cyw43_driver;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_mbedtls;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_lwip/tools;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_lwip;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/lib/cyw43-driver/src;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_cyw43_arch;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_time_adapter;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_crt0;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_clib_interface;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_cxx_options;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_standard_binary_info;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_standard_link;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_fix;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_status_led;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_runtime_init;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_runtime;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_stdio;C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2_common/pico_stdlib;C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/lab2c/build/pico-sdk/src/extra_doxygen"
+		},
+		{
+			"name" : "PICO_DOXYGEN_PRE_DEFINES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "PICO_RP2040=0;PICO_RP2350=1"
+		},
+		{
+			"name" : "PICO_GCC_TRIPLE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "riscv32-unknown-elf;riscv32-corev-elf"
+		},
+		{
+			"name" : "PICO_NO_FLASH",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Default binaries to not not use flash"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "PICO_NO_HARDWARE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "0"
+		},
+		{
+			"name" : "PICO_OBJCOPY",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/external/usr/bin/riscv32-unknown-elf-objcopy.exe"
+		},
+		{
+			"name" : "PICO_OBJDUMP",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/external/usr/bin/riscv32-unknown-elf-objdump.exe"
+		},
+		{
+			"name" : "PICO_ON_DEVICE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "PICO_PIO_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "PICO_PLATFORM",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "PICO Build platform (e.g. rp2040, rp2350, rp2350-riscv,  host)"
+				}
+			],
+			"type" : "STRING",
+			"value" : "rp2350-riscv"
+		},
+		{
+			"name" : "PICO_PLATFORM_CMAKE_FILE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/src/rp2350-riscv.cmake"
+		},
+		{
+			"name" : "PICO_PREVIOUS_CMAKE_TOOLCHAIN_FILE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Saved CMAKE_TOOLCHAIN_FILE"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/cmake/preload/toolchains/pico_riscv_gcc.cmake"
+		},
+		{
+			"name" : "PICO_PREVIOUS_PLATFORM",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Saved PICO Build platform (e.g. rp2040, rp2350, rp2350-riscv,  host)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "rp2350-riscv"
+		},
+		{
+			"name" : "PICO_RISCV",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "PICO_RP2040",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "0"
+		},
+		{
+			"name" : "PICO_RP2350",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "PICO_SDK_FETCH_FROM_GIT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Set to ON to fetch copy of SDK from git if not otherwise locatable"
+				}
+			],
+			"type" : "BOOL",
+			"value" : ""
+		},
+		{
+			"name" : "PICO_SDK_FETCH_FROM_GIT_PATH",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "location to download SDK"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : ""
+		},
+		{
+			"name" : "PICO_SDK_PATH",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to the Raspberry Pi Pico SDK"
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk"
+		},
+		{
+			"name" : "PICO_SDK_TESTS_ENABLED",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enable build of SDK tests"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PICO_STDIO_RTT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Globally enable stdio RTT"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "PICO_STDIO_SEMIHOSTING",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Globally enable stdio semi-hosting"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "PICO_STDIO_UART",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Globally enable stdio UART"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "ON"
+		},
+		{
+			"name" : "PICO_STDIO_USB",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Globally enable stdio USB"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "PICO_TOOLCHAIN_PATH",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/external/usr/bin/"
+		},
+		{
+			"name" : "PICO_TOOLS_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk/tools"
+		},
+		{
+			"name" : "PIOASM_INSTALL_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Directory where pioasm has been installed"
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/lab2c/build/pioasm-install"
+		},
+		{
+			"name" : "_Python3_Compiler_REASON_FAILURE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Compiler reason failure"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "_Python3_Development_REASON_FAILURE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Development reason failure"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "_Python3_EXECUTABLE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Users/domin/AppData/Local/Programs/Python/Python312/python.exe"
+		},
+		{
+			"name" : "_Python3_INTERPRETER_PROPERTIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Python3 Properties"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "Python;3;12;4;32;64;;;abi3;C:\\Users\\domin\\AppData\\Local\\Programs\\Python\\Python312\\Lib;C:\\Users\\domin\\AppData\\Local\\Programs\\Python\\Python312\\Lib;C:\\Users\\domin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages;C:\\Users\\domin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages"
+		},
+		{
+			"name" : "_Python3_INTERPRETER_SIGNATURE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "8dd2aad7e4957f3ff2fd564083b29896"
+		},
+		{
+			"name" : "_Python3_NumPy_REASON_FAILURE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "NumPy reason failure"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "lab2a_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/lab2c/build"
+		},
+		{
+			"name" : "lab2a_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "lab2a_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/lab2c"
+		},
+		{
+			"name" : "pico_sdk_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/Labor2_Template/lab2c/build/pico-sdk"
+		},
+		{
+			"name" : "pico_sdk_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "pico_sdk_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/pico-sdk"
+		},
+		{
+			"name" : "picotool_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for picotool."
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/Users/domin/Desktop/Computerarchitektur/computerarchitektur_arm/external/usr/lib/cmake/picotool"
+		},
+		{
+			"name" : "pioasm_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for pioasm."
+				}
+			],
+			"type" : "PATH",
+			"value" : "pioasm_DIR-NOTFOUND"
+		}
+	],
+	"kind" : "cache",
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 0
+	}
+}
