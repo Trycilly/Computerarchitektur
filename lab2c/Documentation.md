@@ -59,39 +59,19 @@ The display is partitioned dynamically based on the current system operational s
 
 ### 3.1 Global & Static Internal Modules Variables
 
-```
-+-----------------------------------------------------------------------------------------------+
-|                                     DATA DICTIONARY                                           |
-+----------------------+-----------------------+------------------+-----------------------------+
-| Variable Identifier  | Memory Scope / Type   | Valid Ranges     | Architecture Purpose        |
-+----------------------+-----------------------+------------------+-----------------------------+
-| cursor_pos           | static pos_t          | x, y: [0...239]  | Tracks cursor pixel         |
-|                      |                       |                  | intersection vector         |
-+----------------------+-----------------------+------------------+-----------------------------+
-| cursor_visible       | static bool           | true / false     | Tracks cursor visual        |
-|                      |                       |                  | persistence state           |
-+----------------------+-----------------------+------------------+-----------------------------+
-| last_move_time       | static uint64_t       | 0...2^64 - 1 us  | System tick stamp used      |
-|                      |                       |                  | to compute timeouts         |
-+----------------------+-----------------------+------------------+-----------------------------+
-| cursor_edit          | static clock_cursor_t | NONE(0), HOUR(1),| Defines current cursor      |
-|                      |                       | MINUTE(2)        | context state machine       |
-+----------------------+-----------------------+------------------+-----------------------------+
-| hours                | static int            | 0...23           | Core system hour tracks     |
-|                      |                       |                  | natively in UTC time        |
-+----------------------+-----------------------+------------------+-----------------------------+
-| minutes              | static int            | 0...59           | Core clock minutes          |
-+----------------------+-----------------------+------------------+-----------------------------+
-| seconds              | static int            | 0...59           | Core clock seconds          |
-+----------------------+-----------------------+------------------+-----------------------------+
-| active_timezone      | static timezones_t    | 0...3            | Array lookup index targeting|
-|                      |                       |                  | the timezone layout         |
-+----------------------+-----------------------+------------------+-----------------------------+
-| screen               | static uint16_t* | 16-bit RGB565    | Heap pointer memory buffer       |
-|                      |                       | allocations      | for frame rendering         |
-+----------------------+-----------------------+------------------+-----------------------------+
+### DATA DICTIONARY
 
-```
+| Variable Identifier | Memory Scope / Type | Valid Ranges | Architecture Purpose |
+| --- | --- | --- | --- |
+| `cursor_pos` | static pos_t | x, y: [0...239] | Tracks cursor pixel intersection vector |
+| `cursor_visible` | static bool | true / false | Tracks cursor visual persistence state |
+| `last_move_time` | static uint64_t | 0...2^64 - 1 us | System tick stamp used to compute timeouts |
+| `cursor_edit` | static clock_cursor_t | NONE(0), HOUR(1), MINUTE(2) | Defines current cursor context state machine |
+| `hours` | static int | 0...23 | Core system hour tracks natively in UTC time |
+| `minutes` | static int | 0...59 | Core clock minutes |
+| `seconds` | static int | 0...59 | Core clock seconds |
+| `active_timezone` | static timezones_t | 0...3 | Array lookup index targeting the timezone layout |
+| `screen` | static uint16_t* | 16-bit RGB565 allocations | Heap pointer memory buffer for frame rendering |
 
 ### 3.2 Complex Compound Data Structures
 
@@ -343,22 +323,15 @@ $$\text{23:59:58} \xrightarrow{+1\text{s}} \text{23:59:59} \xrightarrow{+1\text{
 
 The system was compiled with `SELECT_12HOURS == 1` and initialized via test cases to verify the AM/PM formatting transitions:
 
-```
-+-----------------------------------------------------------------------------------------+
-|                              12-HOUR OVERFLOW TEST LOGS                                 |
-+----------------------+-----------------------+------------------+-----------------------+
-| Core Initial State   | Expected Next State   | Measured Output  | Verification Pass?    |
-+----------------------+-----------------------+------------------+-----------------------+
-| 11:59:59 AM          | 12:00:00 PM           | 12:00:00 PM      | SUCCESSFUL PASS       |
-+----------------------+-----------------------+------------------+-----------------------+
-| 12:59:59 PM          | 01:00:00 PM           |  1:00:00 PM      | SUCCESSFUL PASS       |
-+----------------------+-----------------------+------------------+-----------------------+
-| 11:59:59 PM          | 12:00:00 AM           | 12:00:00 AM      | SUCCESSFUL PASS       |
-+----------------------+-----------------------+------------------+-----------------------+
-| 12:59:59 AM          | 01:00:00 AM           |  1:00:00 AM      | SUCCESSFUL PASS       |
-+----------------------+-----------------------+------------------+-----------------------+
+### 12-HOUR OVERFLOW TEST LOGS 
 
-```
+|Core Initial State | Expected Next State | Measured Output |Verification Pass?
+| --- |--- | --- | --- |
+| 11:59:59 AM | 12:00:00 PM | 12:00:00 PM | SUCCESSFUL PASS |
+| 12:59:59 AM | 12:00:00 PM |  1:00:00 PM | SUCCESSFUL PASS |
+| 11:59:59 AM | 12:00:00 AM | 12:00:00 AM | SUCCESSFUL PASS |
+| 12:59:59 AM | 12:00:00 AM |  1:00:00 AM | SUCCESSFUL PASS |
+
 
 > **Implementation Detail:** As required by Section A.2 of the user manual, numbers less than 10 are rendered without leading zeros in the final user interface string (e.g., `1:0 PM` instead of `01:00 PM`), maintaining clean spacing layouts.
 
