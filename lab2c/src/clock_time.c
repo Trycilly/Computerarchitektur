@@ -19,11 +19,13 @@ static int seconds = CLOCK_TIME_START_SECOND;
 static int minutes = CLOCK_TIME_START_MINUTE;
 static int hours = CLOCK_TIME_START_HOUR;
 
+/* Timezone settings and tracking */
 static int timezone_offset_hours = CLOCK_TIME_START_OFFSET_HOUR;
 static uint64_t last_tick_us = 0;
 
 static timezones_t active_timezone = TIMEZONE_UTC;
 
+/* Lookup table for supported timezones */
 static timezone_def_t timezone_def[] = {
     {"UTC", "Coordinated Universal Time", 0},
     {"WET", "Western European Time", 0},
@@ -39,7 +41,7 @@ const char *clock_time_get_timezone_name(void)
 static int wrap24(int h)
 {
     h = h % 24;
-    if (h < 0)
+    if (h < 0) /* Handle negative modulo for backward adjustments */
         h += 24;
     return h;
 }
@@ -47,21 +49,24 @@ static int wrap24(int h)
 static int wrap60(int v)
 {
     v = v % 60;
-    if (v < 0)
+    if (v < 0) /* Handle negative modulo for backward adjustments */
         v += 60;
     return v;
 }
 
 bool clock_time_inc_second(uint64_t tick_us)
 {
+    /* Initialize baseline timestamp on the first call */
     if (last_tick_us == 0)
         last_tick_us = tick_us;
+
+    /* Return early if a full second hasn't passed yet (1,000,000 microseconds) */
     if ((tick_us - last_tick_us) < (1000 * 1000))
         return false;
 
     last_tick_us += (1000 * 1000);
 
-    // Corrected cascade order logic
+    /* Cascade time updates from seconds up to hours */
     seconds++;
     if (seconds >= 60)
     {
@@ -107,7 +112,7 @@ void clock_time_get_local(int *hour, int *minute, int *second)
     assert(minute != NULL);
     assert(second != NULL);
 
-    // Uses the robust mathematical wrap function to cleanly catch shifts
+    /* Calculate local hour by applying the active timezone offset */
     *hour = wrap24(hours + timezone_offset_hours);
     *minute = minutes;
     *second = seconds;
@@ -139,6 +144,7 @@ void clock_time_format_string(char *buffer, int hour, int minute, int second)
     assert(buffer != NULL);
 
 #if SELECT_12HOURS == 1
+    /* Convert 24-hour format to 12-hour AM/PM format */
     int hour_12 = hour % 12;
     if (hour_12 == 0)
         hour_12 = 12;
