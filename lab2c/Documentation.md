@@ -53,7 +53,6 @@ The display is partitioned dynamically based on the current system operational s
 * **Press Joystick Button:** Drops the cursor selection state immediately back to normal, locking in the configuration.
 
 
-
 ---
 
 ## 3. Data Dictionary & Memory Layout
@@ -145,7 +144,7 @@ The system architecture is separated into distinct functional layers:
 |  clock_time.c   |  | clock_cursor.c  |  |  clock_gui.c    |
 +-----------------+  +-----------------+  +-----------------+
 
----
+```
 
 ### 4.2 Module Overview & Subroutine Interfaces
 
