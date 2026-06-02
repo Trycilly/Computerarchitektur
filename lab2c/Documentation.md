@@ -141,8 +141,8 @@ The system architecture is separated into distinct functional layers:
          |                    |                    |
 +--------v--------+  +--------v--------+  +--------v--------+
 |   TIME ENGINE   |  |   CURSOR/INPUT  |  |  GRAPHICS ENGINE|
-|  clock_time.c   |  | clock_cursor.c  |  |  clock_gui.c    |
 |  clock_time.h   |  | clock_cursor.h  |  |  clock_gui.h    |
+|  clock_time.c   |  | clock_cursor.c  |  |  clock_gui.c    |
 +-----------------+  +-----------------+  +-----------------+
 
 ```
@@ -160,84 +160,50 @@ The layout below demonstrates how to format Section 4 by combining the header de
 ### 4.2 Module Overview & Subroutine Interfaces
 
 #### 4.2.1 Application Controller Module (`clock.h` / `clock.c`)
-
-* **Module Description:** This is the main orchestrator of the system. `clock.h` establishes global definitions, baseline error-handling macros, and geometric types used by all modules. `clock.c` initializes all peripheral drivers, implements the primary operational loop, coordinates execution states, and applies debouncing to the timezone configuration button.
+* **Module Description:** This acts as the main program orchestrator. `clock.h` establishes global workspace definitions, baseline macro utilities for program-wide runtime error logging, and the foundational geometric spatial types (`pos_t`, `box_t`) used uniformly by all hardware interaction pipelines. `clock.c` contains the primary initialization sequences, executes the top-level main operational polling loop, monitors asynchronous input flags, and enforces software lockout filters to debounce the hardware timezone switch.
 * **Subroutines & Interfaces:**
-* `int main()`
-* *Purpose:* Calibrates core platform clocks, launches driver instances, initializes the graphics engine, registers coordinate bounding boxes for user input, and spins the infinite polling cycle that drives time increments and button events.
-
-
-
-
+  * `int main()`
+    * *Purpose:* Performs low-level calibration of peripheral subsystem clocks, hooks initial driver dependencies, initializes internal tracking variables, provisions regional layout boundary thresholds, and drives the central loop handling regular chronological step increments and asynchronous control events.
 
 #### 4.2.2 Time Engine Module (`clock_time.h` / `clock_time.c`)
-
-* **Module Description:** Manages internal tracking registers, executes UTC timekeeping math, handles local timezone coordinate transformations, and formats digital time notations based on build configurations.
+* **Module Description:** Evaluates chronological math tracks, coordinates current local timezone offset mappings, and manages conditional time notation display formatting guidelines. The underlying time structures are recorded natively in a strict UTC context to insulate system clock calculations from configuration disruptions.
 * **Subroutines & Interfaces:**
-* `void clock_time_set_utc(int hour, int minute, int second);`
-* *Purpose:* Directly initializes internal UTC clock registers with verified numerical parameters.
-
-
-* `void clock_time_get_utc(int *hour, int *minute, int *second);`
-* *Purpose:* Exposes raw, unmodified baseline UTC register values via memory reference pointers.
-
-
-* `void clock_time_get_local(int *hour, int *minute, int *second);`
-* *Purpose:* Computes the active local clock output values by applying timezone array offsets, passing data through mathematical filters to handle midnight overflows securely.
-
-
-* `bool clock_time_inc_second(uint64_t tick_us);`
-* *Purpose:* Monitors system clock uptime deltas to increment seconds and smoothly cascade timing updates across minute and hour boundary steps. Returns `true` to signal that a layout re-render is required.
-
-
-* `void clock_time_change_hour_utc(int change_value);`
-* *Purpose:* Adjusts the baseline UTC hour engine variable, using 24-hour bounding constraints to ensure stability during adjustment states.
-
-
-* `void clock_time_change_minute_utc(int change_value);`
-* *Purpose:* Adjusts the baseline UTC minute engine variable, using 60-minute bounding constraints to ensure stability during adjustment states.
-
-
-* `void clock_time_set_timezone(timezones_t tz);`
-* *Purpose:* Updates index trackers to load custom timezones, shifting local offset configurations while maintaining unaltered core UTC registers.
-
-
-* `bool clock_time_is_pm(void);` *(Only available if `SELECT_12HOURS == 1`)*
-* *Purpose:* Checks active metrics to determine if the local time falls within afternoon notation guidelines (`12:00` to `23:59`) to apply AM/PM indicator tags.
-
-
-
-
+  * `void clock_time_set_utc(int hour, int minute, int second);`
+    * *Purpose:* Directly parameters-initialize internal UTC engine registers following automated diagnostic or manual input selection criteria.
+  * `void clock_time_get_utc(int *hour, int *minute, int *second);`
+    * *Purpose:* Unpacks and safely copies unmodified base system UTC configuration indexes out to calling references via reference tracking parameters.
+  * `void clock_time_get_local(int *hour, int *minute, int *second);`
+    * *Purpose:* Computes current timezone-adjusted parameters by overlaying active conversion scale offsets, executing localized modular mapping formulas to ensure safe bounds wrapping over day-end rollover edges.
+  * `bool clock_time_inc_second(uint64_t tick_us);`
+    * *Purpose:* Monitors hardware uptime microsecond intervals to advance seconds tracking and manage cascading transitions across minutes and hours limits. Returns `true` if a step transition happens, signaling an abstract screen update request.
+  * `void clock_time_change_hour_utc(int change_value);`
+    * *Purpose:* Modifies the core UTC hour register using signed values, verifying adjustments against a strict 24-hour wrap array configuration pattern to ensure robust operational execution.
+  * `void clock_time_change_minute_utc(int change_value);`
+    * *Purpose:* Modifies the core UTC minute register using signed values, verifying adjustments against a strict 60-minute wrapping filter pattern to preserve parameter boundaries.
+  * `void clock_time_set_timezone(timezones_t tz);`
+    * *Purpose:* Switches structural parameters to alter active timezone mappings, shifting local offsets without affecting the core clock register counters.
+  * `bool clock_time_is_pm(void);` *(Only available if compiled with `SELECT_12HOURS == 1`)*
+    * *Purpose:* Evaluates configuration steps to determine if local time tracks fall into post-meridiem spaces (`12:00` to `23:59`) to guide structural text indicator parsing rules.
 
 #### 4.2.3 Cursor Input Module (`clock_cursor.h` / `clock_cursor.c`)
-
-* **Module Description:** Interprets incoming multi-axis joystick ADC signals, filters mechanical bounce on switch lines, maps cursor positions across bounded tracking areas, and configures field editing selections.
+* **Module Description:** Captures physical dual-channel analog joystick ADC voltage variations, applies software low-pass filters to clear contact bounce from mechanical interrupt vectors, calculates boundary-clamped screen intersection paths, and establishes interactive data configuration scopes.
 * **Subroutines & Interfaces:**
-* `void clock_cursor_init(box_t box_hour, box_t box_minute);`
-* *Purpose:* Configures targeted analog pins, maps first-boot positioning steps, sets up inactivity decay timing windows, and locks down bounding box coordinates for interactive elements.
-
-
-* `bool clock_cursor_update(uint64_t tick_us);`
-* *Purpose:* Polling process that reads physical joystick inputs, filters switch bounce, shifts on-screen coordinates, implements variable-rate adjustment acceleration, and drops display visibilities during idle states. Returns `true` to request a visual frame update.
-
-
-* `clock_cursor_edit_t clock_cursor_get_state(pos_t *pos, bool *visible);`
-* *Purpose:* Exposes current cursor coordinates, visibility flags, and active editing selections to outside graphics subsystems using secure tracking pointers.
-
-
+  * `void clock_cursor_init(box_t box_hour, box_t box_minute);`
+    * *Purpose:* Calibrates peripheral ADC channels, locks startup layout coordinates, starts internal decay countdown benchmarks, and registers focus window targets over the alphanumeric screen grid arrays.
+  * `bool clock_cursor_update(uint64_t tick_us);`
+    * *Purpose:* Polling sequence checks joystick coordinates, debounces switch interactions, implements multi-rate adjustment acceleration speeds based on physical displacement thresholds, and manages cursor face fade-outs when idle. Returns `true` if position tracking edits require layout frame redraws.
+  * `clock_cursor_edit_t clock_cursor_get_state(pos_t *pos, bool *visible);`
+    * *Purpose:* Delivers precise structural information regarding active pointer coordinates, visual visibility flags, and active menu interaction state classifications to outside rendering layout containers.
 
 #### 4.2.4 Graphics Engine Module (`clock_gui.h` / `clock_gui.c`)
-
-* **Module Description:** Communicates with the physical TFT display, manages structural frame memory maps, draws analog dials, and transforms text vectors into aligned, formatted character fields.
+* **Module Description:** Coordinates active communication links over the peripheral bus layout to the TFT display module, manages frame canvas image mapping tables, calculates analog hand geometries, and formats digital text values following conditional alignment constraints.
 * **Subroutines & Interfaces:**
-* `void clock_gui_init(void);`
-* *Purpose:* Configures communication buses, allocates active image memories, draws static background face components, and calculates geometric positions for the dial hands.
+  * `void clock_gui_init(void);`
+    * *Purpose:* Initializes hardware bus lines, handles internal memory allocations for frame layouts, draws fixed background graphics components, and generates coordinate lookup index arrays for analog dial hand paths.
+  * `void clock_gui_update(uint64_t tick_us);`
+    * *Purpose:* Clears active workspaces using pre-rendered canvas states, evaluates compilation switches to map active text configurations, tracks variable component color state transitions, and pushes output frames out to display hardware.
 
-
-* `void clock_gui_update(uint64_t tick_us);`
-* *Purpose:* Restores the structural canvas, evaluates build formats, calculates dynamic angular offsets for color-coded hands, renders numerical values using custom spacing rules, and flushes frame changes directly to the display hardware.
 ---
-
 ## 5. Execution Logic & Flow Charts
 
 ### 5.1 Main Runtime Loop Flow Chart
