@@ -61,36 +61,36 @@ The display is partitioned dynamically based on the current system operational s
 ### 3.1 Global & Static Internal Modules Variables
 
 ```
-+-----------------------------------------------------------------------------------------+
-|                                     DATA DICTIONARY                                     |
-+----------------------+-----------------------+------------------+-----------------------+
-| Variable Identifier  | Memory Scope / Type   | Valid Ranges     | Architecture Purpose  |
-+----------------------+-----------------------+------------------+-----------------------+
-| cursor_pos           | static pos_t          | x, y: [0...239]  | Tracks cursor pixel   |
-|                      |                       |                  | intersection vector   |
-+----------------------+-----------------------+------------------+-----------------------+
-| cursor_visible       | static bool           | true / false     | Tracks cursor visual  |
-|                      |                       |                  | persistence state     |
-+----------------------+-----------------------+------------------+-----------------------+
-| last_move_time       | static uint64_t       | 0...2^64 - 1 us  | System tick stamp used|
-|                      |                       |                  | to compute timeouts   |
-+----------------------+-----------------------+------------------+-----------------------+
-| cursor_edit          | static clock_cursor_t | NONE(0), HOUR(1),| Defines current cursor|
-|                      |                       | MINUTE(2)        | context state machine |
-+----------------------+-----------------------+------------------+-----------------------+
-| hours                | static int            | 0...23           | Core system hour tracks|
-|                      |                       |                  | natively in UTC time  |
-+----------------------+-----------------------+------------------+-----------------------+
-| minutes              | static int            | 0...59           | Core clock minutes    |
-+----------------------+-----------------------+------------------+-----------------------+
-| seconds              | static int            | 0...59           | Core clock seconds    |
-+----------------------+-----------------------+------------------+-----------------------+
++-----------------------------------------------------------------------------------------------+
+|                                     DATA DICTIONARY                                           |
++----------------------+-----------------------+------------------+-----------------------------+
+| Variable Identifier  | Memory Scope / Type   | Valid Ranges     | Architecture Purpose        |
++----------------------+-----------------------+------------------+-----------------------------+
+| cursor_pos           | static pos_t          | x, y: [0...239]  | Tracks cursor pixel         |
+|                      |                       |                  | intersection vector         |
++----------------------+-----------------------+------------------+-----------------------------+
+| cursor_visible       | static bool           | true / false     | Tracks cursor visual        |
+|                      |                       |                  | persistence state           |
++----------------------+-----------------------+------------------+-----------------------------+
+| last_move_time       | static uint64_t       | 0...2^64 - 1 us  | System tick stamp used      |
+|                      |                       |                  | to compute timeouts         |
++----------------------+-----------------------+------------------+-----------------------------+
+| cursor_edit          | static clock_cursor_t | NONE(0), HOUR(1),| Defines current cursor      |
+|                      |                       | MINUTE(2)        | context state machine       |
++----------------------+-----------------------+------------------+-----------------------------+
+| hours                | static int            | 0...23           | Core system hour tracks     |
+|                      |                       |                  | natively in UTC time        |
++----------------------+-----------------------+------------------+-----------------------------+
+| minutes              | static int            | 0...59           | Core clock minutes          |
++----------------------+-----------------------+------------------+-----------------------------+
+| seconds              | static int            | 0...59           | Core clock seconds          |
++----------------------+-----------------------+------------------+-----------------------------+
 | active_timezone      | static timezones_t    | 0...3            | Array lookup index targeting|
-|                      |                       |                  | the timezone layout   |
-+----------------------+-----------------------+------------------+-----------------------+
-| screen               | static uint16_t* | 16-bit RGB565    | Heap pointer memory buffer|
-|                      |                       | allocations      | for frame rendering   |
-+----------------------+-----------------------+------------------+-----------------------+
+|                      |                       |                  | the timezone layout         |
++----------------------+-----------------------+------------------+-----------------------------+
+| screen               | static uint16_t* | 16-bit RGB565    | Heap pointer memory buffer       |
+|                      |                       | allocations      | for frame rendering         |
++----------------------+-----------------------+------------------+-----------------------------+
 
 ```
 
@@ -142,61 +142,100 @@ The system architecture is separated into distinct functional layers:
 +--------v--------+  +--------v--------+  +--------v--------+
 |   TIME ENGINE   |  |   CURSOR/INPUT  |  |  GRAPHICS ENGINE|
 |  clock_time.c   |  | clock_cursor.c  |  |  clock_gui.c    |
+|  clock_time.h   |  | clock_cursor.h  |  |  clock_gui.h    |
 +-----------------+  +-----------------+  +-----------------+
 
 ```
 
-### 4.2 Module Subroutine Interfaces
+To answer your questions directly: **No, you should not separate them like this, and yes, you must absolutely include `clock.c` and `clock.h**` to satisfy Appendix A of your lab manual.
 
-#### Module: `clock_time.c`
+Splitting the documentation into standalone `.h` and `.c` sections creates unnecessary repetition and breaks up the logical layout. Because a `.h` file and a `.c` file together form a **single software module**, your documentation should group them by module name.
 
+`clock.c` must be included because it acts as the **Application Controller Module** that coordinates the entire system. `clock.h` must be included because it defines the core types (`pos_t`, `box_t`) and standard error macros that all other modules use.
+
+The layout below demonstrates how to format Section 4 by combining the header descriptions, subroutines, and purposes into unified, professional module profiles.
+
+---
+
+### 4.2 Module Overview & Subroutine Interfaces
+
+#### 4.2.1 Application Controller Module (`clock.h` / `clock.c`)
+
+* **Module Description:** This is the main orchestrator of the system. `clock.h` establishes global definitions, baseline error-handling macros, and geometric types used by all modules. `clock.c` initializes all peripheral drivers, implements the primary operational loop, coordinates execution states, and applies debouncing to the timezone configuration button.
+* **Subroutines & Interfaces:**
+* `int main()`
+* *Purpose:* Calibrates core platform clocks, launches driver instances, initializes the graphics engine, registers coordinate bounding boxes for user input, and spins the infinite polling cycle that drives time increments and button events.
+
+
+
+
+
+#### 4.2.2 Time Engine Module (`clock_time.h` / `clock_time.c`)
+
+* **Module Description:** Manages internal tracking registers, executes UTC timekeeping math, handles local timezone coordinate transformations, and formats digital time notations based on build configurations.
+* **Subroutines & Interfaces:**
 * `void clock_time_set_utc(int hour, int minute, int second);`
-* *Purpose:* Direct initialization of the internal UTC core register time values.
+* *Purpose:* Directly initializes internal UTC clock registers with verified numerical parameters.
+
+
+* `void clock_time_get_utc(int *hour, int *minute, int *second);`
+* *Purpose:* Exposes raw, unmodified baseline UTC register values via memory reference pointers.
 
 
 * `void clock_time_get_local(int *hour, int *minute, int *second);`
-* *Purpose:* Computes the current time values offset by the active timezone rules and handles midnight wrapping transitions safely.
+* *Purpose:* Computes the active local clock output values by applying timezone array offsets, passing data through mathematical filters to handle midnight overflows securely.
 
 
 * `bool clock_time_inc_second(uint64_t tick_us);`
-* *Purpose:* Checks system time delta loops. Increments seconds and triggers cascading updates for minutes and hours when a 1-second ($1,000,000\text{ }\mu\text{s}$) interval passes. Returns `true` if the time changes.
+* *Purpose:* Monitors system clock uptime deltas to increment seconds and smoothly cascade timing updates across minute and hour boundary steps. Returns `true` to signal that a layout re-render is required.
 
 
 * `void clock_time_change_hour_utc(int change_value);`
-* *Purpose:* Modifies the baseline UTC hour variable directly using a mathematical 24-hour bounding function.
+* *Purpose:* Adjusts the baseline UTC hour engine variable, using 24-hour bounding constraints to ensure stability during adjustment states.
 
 
 * `void clock_time_change_minute_utc(int change_value);`
-* *Purpose:* Modifies the baseline UTC minute variable directly using a mathematical 60-minute bounding function.
+* *Purpose:* Adjusts the baseline UTC minute engine variable, using 60-minute bounding constraints to ensure stability during adjustment states.
+
+
+* `void clock_time_set_timezone(timezones_t tz);`
+* *Purpose:* Updates index trackers to load custom timezones, shifting local offset configurations while maintaining unaltered core UTC registers.
+
+
+* `bool clock_time_is_pm(void);` *(Only available if `SELECT_12HOURS == 1`)*
+* *Purpose:* Checks active metrics to determine if the local time falls within afternoon notation guidelines (`12:00` to `23:59`) to apply AM/PM indicator tags.
 
 
 
-#### Module: `clock_cursor.c`
 
+
+#### 4.2.3 Cursor Input Module (`clock_cursor.h` / `clock_cursor.c`)
+
+* **Module Description:** Interprets incoming multi-axis joystick ADC signals, filters mechanical bounce on switch lines, maps cursor positions across bounded tracking areas, and configures field editing selections.
+* **Subroutines & Interfaces:**
 * `void clock_cursor_init(box_t box_hour, box_t box_minute);`
-* *Purpose:* Initializes internal state variables, calibrates hardware ADC interfaces, and registers the bounding box screen spaces.
+* *Purpose:* Configures targeted analog pins, maps first-boot positioning steps, sets up inactivity decay timing windows, and locks down bounding box coordinates for interactive elements.
 
 
 * `bool clock_cursor_update(uint64_t tick_us);`
-* *Purpose:* Polling routine that processes button inputs, applies software debouncing filters, updates cursor coordinates from joystick movements, handles acceleration tracking logic, and manages inactivity fade timeouts. Returns `true` if structural visual updates are needed.
+* *Purpose:* Polling process that reads physical joystick inputs, filters switch bounce, shifts on-screen coordinates, implements variable-rate adjustment acceleration, and drops display visibilities during idle states. Returns `true` to request a visual frame update.
 
 
 * `clock_cursor_edit_t clock_cursor_get_state(pos_t *pos, bool *visible);`
-* *Purpose:* Exposes current cursor attributes to the graphics layout subsystem safely via targeted tracking pointers.
+* *Purpose:* Exposes current cursor coordinates, visibility flags, and active editing selections to outside graphics subsystems using secure tracking pointers.
 
 
 
-#### Module: `clock_gui.c`
+#### 4.2.4 Graphics Engine Module (`clock_gui.h` / `clock_gui.c`)
 
+* **Module Description:** Communicates with the physical TFT display, manages structural frame memory maps, draws analog dials, and transforms text vectors into aligned, formatted character fields.
+* **Subroutines & Interfaces:**
 * `void clock_gui_init(void);`
-* *Purpose:* Allocates frame buffers, configures target SPI channels for screen communication, builds face asset baselines, and commits visual references into background memory layers.
+* *Purpose:* Configures communication buses, allocates active image memories, draws static background face components, and calculates geometric positions for the dial hands.
 
 
 * `void clock_gui_update(uint64_t tick_us);`
-* *Purpose:* Restores background canvas baselines, evaluates conditional formatting directives (`SELECT_12HOURS`), recalculates dial coordinates, outputs alphanumeric character grids, and pushes changes out to the physical display screen.
-
-
-
+* *Purpose:* Restores the structural canvas, evaluates build formats, calculates dynamic angular offsets for color-coded hands, renders numerical values using custom spacing rules, and flushes frame changes directly to the display hardware.
 ---
 
 ## 5. Execution Logic & Flow Charts
