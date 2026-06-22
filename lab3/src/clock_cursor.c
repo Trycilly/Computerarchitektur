@@ -1,0 +1,204 @@
+/**
+ * @file Implements the cursor allowing to set the time:
+ *  - when moving the Joystick, a cursor (two lines) should appear
+ *    (see clock_gui.c)
+ *  Using the joystack, one shall edit (change) the hour and minute:
+ *  - when not in editing mode:
+ *    - Pulling the joystick position of the cursor should change:
+ *       pull up: decrease y  /  pull down: increase y
+ *       pull left: decrease x / pull right: increase x
+ *    - when clicking on hour / minute: Select Edit mode for hour or minute
+ *  - when in editing mode:
+ *    - Pulling the joystick should change the hour / minute:
+ *       pull up: increase hour or minute / pull down: decrease hour or minute
+ *    - When clicking: Get out of Editing mode
+ */
+#include <stdio.h>
+#include <hardware/gpio.h>
+#include <hardware/adc.h>
+
+#include "FreeRTOS.h"
+#include "semphr.h"
+
+#include "clock.h"
+#include "clock_time.h"
+#include "clock_cursor.h"
+
+#define CURSOR_UPDATE_TIME_US        (30 * 1000) // 30 ms
+#define CURSOR_VISIBLE_TIME_US (5 * 1000 * 1000) // 5 seconds
+#define CURSOR_BUTTON_PRESS_TIME_US (200 * 1000) // 200 ms
+
+#ifdef CLOCK_NEED_MUTEX
+static SemaphoreHandle_t clock_semaphore_cursor = NULL;
+#define LOCK   do { xSemaphoreTake(clock_semaphore_cursor, portMAX_DELAY); } while(0)
+#define UNLOCK do { xSemaphoreGive(clock_semaphore_cursor);  } while(0)
+#else
+#define LOCK
+#define UNLOCK
+#endif
+
+/*
+ * The cursors current state (position, mode of edit, visibility and
+ * when that cursor was last visible.
+ */
+static pos_t cursor_pos = {120, 120};
+static bool cursor_visible = true;
+static uint64_t cursor_visible_us = 0;
+
+// Static variables to store the button state (whether pressed and time of press)
+static bool last_button = false;
+static uint64_t last_button_us = 0;
+
+bool clock_cursor_init()
+{
+    adc_init();
+    adc_gpio_init(JOYSTICK_GPIO_X);
+    adc_gpio_init(JOYSTICK_GPIO_Y);
+
+    gpio_init(JOYSTICK_GPIO_BUTTON);           // The GPIO connecting button of this joystick
+    gpio_set_dir(JOYSTICK_GPIO_BUTTON, false); // Set as input
+    gpio_pull_up(JOYSTICK_GPIO_BUTTON);        // Enable Pull-UP Resistor (inverts the button)
+#ifdef CLOCK_NEED_MUTEX
+    clock_semaphore_cursor = xSemaphoreCreateMutex();
+    assert (clock_semaphore_cursor != NULL);
+#endif
+
+    return true;
+}
+
+/**
+ * Confert adc readout to a sensical pointer change value;
+ */
+static int16_t adc_to_pos_value(uint16_t adc)
+{
+    if (adc > (2048 + 1024))
+    {
+        return 10;
+    }
+    else if (adc > (2048 + 512))
+    {
+        return 3;
+    }
+    else if (adc < 512)
+    {
+        return -10;
+    }
+    else if (adc < (2048 - 512))
+    {
+        return -3;
+    }
+    return 0;
+}
+
+/*
+ * Confert adc readout to a sensical pointer change value;
+ */
+static int16_t adc_to_timechange_value(uint16_t adc)
+{
+    if (adc > (2048 + 1024))
+    {
+        return 1;
+    }
+    else if (adc < 1024)
+    {
+        return -1;
+    }
+    return 0;
+}
+
+
+bool clock_cursor_update(uint64_t tick_us)
+{
+    static uint64_t last_update_time_us = 0;
+    static bool update;
+    
+    update = false;
+    if (tick_us - last_update_time_us < CURSOR_UPDATE_TIME_US) {
+        return update;
+    }
+    last_update_time_us = tick_us;
+    const lv_obj_t * screen_active = lv_screen_active();
+    int hours, minutes, seconds;
+    int day, month, year;
+    clock_time_get_local_date(&hours, &minutes, &seconds, &day, &month, &year);
+
+    // --- NEU: Button-Logik und Zeitzonen-Berechnung ---
+    static bool show_est = false;
+    static bool last_button_state = false;
+
+    // Joystick Button auslesen (hängt an GPIO 20)
+    bool button_pressed = !gpio_get(20); 
+    
+    if (button_pressed && !last_button_state) {
+        show_est = !show_est; // Umschalten
+    }
+    last_button_state = button_pressed;
+
+    // Zeit für die Anzeige berechnen
+    int display_hours = hours;
+    if (show_est) {
+        display_hours = hours - 5;
+        if (display_hours < 0) display_hours += 24;
+    }
+
+    // Zeitzonen-Text updaten
+    if (show_est) {
+        lv_textarea_set_text(ui_Screen1TZ, "EST");
+        lv_textarea_set_text(ui_Screen2TZ, "EST");
+    } else {
+        lv_textarea_set_text(ui_Screen1TZ, "WET"); 
+        lv_textarea_set_text(ui_Screen2TZ, "WET");
+    }
+
+    // Wochentag updaten (Hier als Platzhalter fest auf '1' gesetzt, 
+    // falls du noch keine Funktion für den Wochentag hast)
+    int weekday = 1; // HIER EVTL. EIGENE FUNKTION EINBAUEN
+    const char * weekday_strs[] = {"---", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+    lv_textarea_set_text(ui_Screen1Weekday, weekday_strs[weekday]);
+    lv_textarea_set_text(ui_Screen2Weekday, weekday_strs[weekday]);
+
+    // Update state
+    bool button = gpio_get(JOYSTICK_GPIO_BUTTON);
+    adc_select_input(0);
+    uint16_t adc_x = adc_read();
+    adc_select_input(1);
+    uint16_t adc_y = adc_read();
+    int16_t diff_x = adc_to_pos_value(adc_x);
+    int16_t diff_y = adc_to_pos_value(adc_y);
+
+    // Only if diffs, there is a cursor update
+    if (diff_x != 0 || diff_y != 0) {
+        cursor_visible_us = tick_us;
+        update = true;
+    }
+
+    LOCK;
+    if (button && !last_button && tick_us - last_button_us > CURSOR_BUTTON_PRESS_TIME_US)
+    {
+        last_button_us = tick_us;
+        cursor_visible_us = tick_us;
+        update = true;
+    }
+    if (tick_us - cursor_visible_us >= CURSOR_VISIBLE_TIME_US)
+        cursor_visible = false;
+    else
+        cursor_visible = true;
+
+    last_button = button;
+    cursor_pos.x += diff_x;
+    cursor_pos.y += diff_y;
+    UNLOCK;
+    return update;
+}
+
+void clock_cursor_get_state(pos_t *pos, bool *visible)
+{
+    assert (NULL != pos);
+    assert (NULL != visible);
+
+    LOCK;
+    pos->x = cursor_pos.x;
+    pos->y = cursor_pos.y;
+    *visible = cursor_visible;
+    UNLOCK;
+}
