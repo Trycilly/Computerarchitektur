@@ -2,21 +2,26 @@
 #include <stdio.h>
 
 // Include the hardware driver for the IMU
-#include "QMI8658.h" 
+#include "qmi8658/qmi8658.h" 
+
+static qmi8658_dev_t imu_dev;
 
 bool clock_imu_init(void) {
-    // Initialize the IMU sensor
-    QMI8658_init();
+    // Initialize the IMU sensor using the real library
+    if (qmi8658_init(&imu_dev) != 0) {
+        return false;
+    }
+    qmi8658_set_accel_range(&imu_dev, QMI8658_ACCEL_RANGE_2G);
+    qmi8658_set_accel_odr(&imu_dev, QMI8658_ACCEL_ODR_125HZ);
+    qmi8658_enable_accel(&imu_dev, true);
     return true;
 }
 
 clock_tilt_dir_t clock_imu_get_tilt(void) {
     float acc[3] = {0.0f, 0.0f, 0.0f};  // Array to hold X, Y, Z acceleration
-    float gyro[3] = {0.0f, 0.0f, 0.0f}; // Array to hold gyroscope data (required by the read function)
-    unsigned int tim;                   // Timestamp variable (required by the read function)
     
-    // Read the actual sensor data into our arrays
-    QMI8658_read_xyz(acc, gyro, &tim);
+    // Read the actual sensor data into our arrays in milli-g (mg)
+    qmi8658_read_accel(&imu_dev, &acc[0], &acc[1], &acc[2]);
     
     // DEBUGGING TIP: If the screen isn't switching, uncomment the line below 
     // to see exactly what numbers your sensor is outputting in the serial console!
@@ -33,4 +38,4 @@ clock_tilt_dir_t clock_imu_get_tilt(void) {
     }
     
     return TILT_NONE;
-}
+}

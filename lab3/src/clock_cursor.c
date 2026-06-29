@@ -117,46 +117,7 @@ bool clock_cursor_update(uint64_t tick_us)
         return update;
     }
     last_update_time_us = tick_us;
-    const lv_obj_t * screen_active = lv_screen_active();
-    int hours, minutes, seconds;
-    int day, month, year;
-    clock_time_get_local_date(&hours, &minutes, &seconds, &day, &month, &year);
-
-    // --- NEU: Button-Logik und Zeitzonen-Berechnung ---
-    static bool show_est = false;
-    static bool last_button_state = false;
-
-    // Joystick Button auslesen (hängt an GPIO 20)
-    bool button_pressed = !gpio_get(20); 
     
-    if (button_pressed && !last_button_state) {
-        show_est = !show_est; // Umschalten
-    }
-    last_button_state = button_pressed;
-
-    // Zeit für die Anzeige berechnen
-    int display_hours = hours;
-    if (show_est) {
-        display_hours = hours - 5;
-        if (display_hours < 0) display_hours += 24;
-    }
-
-    // Zeitzonen-Text updaten
-    if (show_est) {
-        lv_textarea_set_text(ui_Screen1TZ, "EST");
-        lv_textarea_set_text(ui_Screen2TZ, "EST");
-    } else {
-        lv_textarea_set_text(ui_Screen1TZ, "WET"); 
-        lv_textarea_set_text(ui_Screen2TZ, "WET");
-    }
-
-    // Wochentag updaten (Hier als Platzhalter fest auf '1' gesetzt, 
-    // falls du noch keine Funktion für den Wochentag hast)
-    int weekday = 1; // HIER EVTL. EIGENE FUNKTION EINBAUEN
-    const char * weekday_strs[] = {"---", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
-    lv_textarea_set_text(ui_Screen1Weekday, weekday_strs[weekday]);
-    lv_textarea_set_text(ui_Screen2Weekday, weekday_strs[weekday]);
-
     // Update state
     bool button = gpio_get(JOYSTICK_GPIO_BUTTON);
     adc_select_input(0);

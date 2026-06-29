@@ -77,54 +77,47 @@ static void dcf77_reset(DCF77_Bitarray *bitarray)
  * @return false           once parsing failed due to parity errors, logical errors
  * @return true            if parsing was successfull and time is valid
  */
+static int bcd_to_int(const uint8_t *bits, int start, int length) {
+    int val = 0;
+    int multiplier = 1;
+    for (int i = 0; i < length; ++i) {
+        if (i == 4) multiplier = 10; // Switch to 10s place after 4 bits
+        val += bits[start + i]  * ((i < 4) ? bcd_1s_weights[i] : bcd_10s_weights[i - 4]);
+    }
+    return val;
+}
+
+static bool check_parity(const uint8_t *bits, int start, int end, uint8_t parity_bit) {
+    int sum = 0;
+    for (int i = start; i <= end; i++) {
+        sum += bits[i];
+    }
+    return (sum % 2) == parity_bit;
+}
+
 static bool dcf77_parse_frame(const DCF77_Bitarray *bitarray, clock_dcf77_time_t *time)
 {
     assert(bitarray != NULL);
     assert(time != NULL);
 
-    /** TODO: BEGIN Decoding the bits */
-    static int bcd_to_int(const unit8_t *bits, int start, int length) {
-        int val = 0;
-        int multiplier = 1;
-        for (int i = 0; i < length; ++i) {
-            if (i == 4) multiplier = 10; // Switch to 10s place after 4 bits
-            val += bits[start + i]  * ((i <4) ? bcd:_1s_weights[i] : bcd_10s_weights[i - 4]);
-        }
-        return val;
+    //Start-Bit (Bit 20 must be 1)
+    if (bitarray->bits[20] != 1) return false;
+    if (!check_parity(bitarray->bits, 21, 27, bitarray->bits[28])) return false; // P1 (Minutes)
+    if (!check_parity(bitarray->bits, 29, 34, bitarray->bits[35])) return false; // P2 (Hours)
+    if (!check_parity(bitarray->bits, 36, 57, bitarray->bits[58])) return false; // P3 (Date)
 
-        static bool check_parity(const unit8_t *bits, int start, int end, unit8_t parity_bits) {
-            int sum = 0;
-            for (int i = start; i <= end; i++) {
-                sum += bits[i];
-            }
-            return (sum % 2) == parity_bit;
-        }
+    // Decode the time and date information from the bitarray
+    time->minute = bcd_to_int(bitarray->bits, 21, 7);
+    time->hour = bcd_to_int(bitarray->bits, 29, 6);
+    time->day = bcd_to_int(bitarray->bits, 36, 6);
+    time->month = bcd_to_int(bitarray->bits, 45, 5);
+    time->year = bcd_to_int(bitarray->bits, 50, 8) + DCF77_ASSUME_START_YEAR;
 
-        static bool dcff_parse_frame(const DCFF_Bitarray * bitarray, clock_dcf77_time_t * time)
-        {
-            //Start-Bit (Bit 20 must be 1)
-            if (bitarray -> bits[20] != 1) return false;
-            if (!check_parity(bitarray -> bits, 21, 27, bitarray -> bits[28])) return false; // P1 (Minutes)
-            if (!check_parity(bitarray -> bits, 29, 34, bitarray -> bits[35])) return false; // P2 (Hours)
-            if (!check_parity(bitarray -> bits, 36, 57, bitarray -> bits[58])) return false; // P3 (Date)
-
-            // Decode the time and date information from the bitarray
-            time -> minute = bcd_to_int(bitarray -> bits, 21, 7);
-            time -> hour = bcd_to_int(bitarray -> bits, 29, 6);
-            time -> day = bcd_to_int(bitarray -> bits, 36, 6);
-            time -> month = bcd_to_int(bitarray -> bits, 45, 5);
-            time -> year = bcd_to_int(bitarray -> bits, 50, 8) + DCFF_ASSUME_START_YEAR;
-
-            if (time -> houer > 23 || time -> minute > 59 || time -> day < 1 || time -> day > 31 || time -> month > 12) {
-                return false; // Invalid time values
-            }
-
-            time -> valid = true;
-            return true;
-        }
+    if (time->hour > 23 || time->minute > 59 || time->day < 1 || time->day > 31 || time->month > 12) {
+        return false; // Invalid time values
     }
-    /** TODO: END Decoding the bits */
 
+    time->valid = true;
     return true;
 }
 
@@ -145,13 +138,13 @@ static inline void dcf77_feed_event(DCF77_Bitarray *bitarray, clock_dcf77_event_
     else if (event == VALID_SECOND) {
         bitarray -> bit_index = 0; // Reset bit index at the start of a new frame
         // RGB LED Update: Yellow for second pulse
-        gpio_put(GPIO_RGB_LEG_MONO, !gpio_get(GPIO_RGB_LED_MONO)); // Toggle Mono LED for second pulse
+        gpio_put(GPIO_RGB_LED_MONO, !gpio_get(GPIO_RGB_LED_MONO)); // Toggle Mono LED for second pulse
     }
     else if (event == VALID_MINUTE) {
         clock_dcf77_time_t decoded_time;
         if (bitarray -> bit_index >= 58 && dcf77_parse_frame(bitarray, &decoded_time)) {
             // Set the decoded time in the clock_time module
-            clock_time_set_from_dcf77(decodec_time.hour, decoded_time.minute, 0, decoded_time.day, decoded_time.month, decoded_time.year);
+            clock_time_set_from_dcf77(decoded_time.hour, decoded_time.minute, decoded_time.day, decoded_time.month, decoded_time.year);
             gpio_put(GPIO_RGB_LED_R, 0);
         }
         else {

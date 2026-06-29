@@ -16,6 +16,7 @@
 #include "clock_cursor.h"
 #include "clock_gui.h"
 #include "clock_time.h"
+#include "clock_imu.h"
 
 #define CURSOR_LEN 6
 
